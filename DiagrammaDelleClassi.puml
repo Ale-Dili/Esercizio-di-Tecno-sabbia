@@ -64,10 +64,39 @@ class Scatola {
 + void SimulazioneMovimento(Sensore inclinazioni)
 }
 
+class Swing {
+'@brief: Attributo usato per l'inserimento dell'inclinazioen da parte dell'utente'
+-JSlider inviaInclinazione
+'@brief: Attributo che riceverà la nuova inclinazione inserita dall'utente'
+-Sensore riceviInclinazione
+'@brief: Metodo usato per far ricevere al sensore l'inclinazione'
++void Inclina(int inclinazione)
+}
+
+class CDatiCondivisi {
+'@brief: Insieme di scatole'
+-Scatola[] scatole
+'@brief: Numero delle scatole'
+-int NumScatole
+'@brief: Indica se il "gioco" è terminato'
+-boolean finito
+'@brief: inclinazione della sabbia e della pallina'
+-int inclinazione
+'@brief: percentuale di sabbia contenuta nella scatola'
+-int[] percentualeSabbia
+'@brief: Pallina'
+-Pallina ball
+}
+
 
 Sensore "1" -- "1" Scatola : FornisceMisurazioni > 
 Sabbia "1..0" --o "1" Scatola : contenuta > 
 Pallina "1..0" --o "1" Scatola : contenuta >
-
+Swing "1" -- "1" Sensore : inviaDati >
+CDatiCondivisi "1" -- "1" Pallina : interagisce > 
+CDatiCondivisi "1" -- "1" Sabbia : interagisce > 
+CDatiCondivisi "1" -- "1" Scatola : interagisce >
+CDatiCondivisi "1" -- "1" Sensore : interagisce > 
+CDatiCondivisi "1" -- "1" Swing : interagisce > 
 
 @enduml
