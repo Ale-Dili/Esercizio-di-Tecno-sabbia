@@ -1,0 +1,73 @@
+@startuml
+
+
+class Pallina {
+
+'@brief: indica la posizione sull'asse delle ascisse della pallina'
+- int posX
+'@brief: indica la posizione sull'asse delle ordinate della pallina'
+- int posY
+'@brief: indica la velocità sull'asse delle ascisse della pallina'
+- int velX
+'@brief: indica la velocità sull'asse delle ordinate della pallina'
+- int velY
+'@brief: Metodo che aggiorna la posizione e la velocità della pallina'
++ void AggiornaInfo(int velX,int velY)
+}
+
+
+
+class Sabbia {
+'@brief: identifica la quantità di sabbia contenuta in una scatola'
+- double volume
+'@brief: indica la velocità sull'asse delle ascisse della sabbia'
+- int velX
+'@brief: indica la velocità sull'asse delle ordinate della sabbia'
+- int velY
+'@brief: definisce il colore della sabbia'
+- String colore
+'@brief: Metodo che aggiorna gli attributi della sabbia'
++ void AggiornaInfo(Sensore inclinazioni)
+}
+
+class Sensore {
+'@brief: Definisce l'inclinazione del sistema sull'asse delle ascisse'
+- double inclinazioneX
+'@brief: Definisce l'inclinazione del sistema sull'asse delle ordinate'
+- double inclinazioneY
+'@brief: Legge i valori di inclinazione'
++ void Leggi()
+'@brief: Scrive i valori di inclinazione'
++ void Scrivi()
+}
+
+
+
+class Scatola {
+'@brief: Definisce l'altezza della scatola'
+- int altezza
+'@brief: Definisce la larghezza della scatola'
+- int larghezza
+'@brief: Definisce la lunghezza della sctola'
+- int lunghezza
+'@brief: Definisce il materiale contenuto della scatola(sabbia)'
+- Sabbia contenutoScatola
+'@brief: Definisce l'oggetto contenuto nella scatola(pallina)'
+- Pallina oggettoScatola
+'@brief: Metodo usato per visualizzare la sabbia su schermo'
++ void VisualizzaSabbia()
+'@brief: Metodo usato per visualizzare la pallina su schermo'
++ void VisualizzaPallina()
+'@brief: Metodo usato per aggiornare i valori degli attributi della scatola'
++ void Aggiorna(Sensore inclinazioni)
+'@brief: Metodo usato per simulare il movimento della sabbia e della pallina'
++ void SimulazioneMovimento(Sensore inclinazioni)
+}
+
+
+Sensore "1" -- "1" Scatola : FornisceMisurazioni > 
+Sabbia "1..0" --o "1" Scatola : contenuta > 
+Pallina "1..0" --o "1" Scatola : contenuta >
+
+
+@enduml
