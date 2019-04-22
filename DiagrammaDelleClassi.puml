@@ -52,6 +52,8 @@ class Scatola {
 - int lunghezza
 '@brief: Definisce il materiale contenuto della scatola(sabbia)'
 - Sabbia contenutoScatola
+'@brief: indica l'inclinazione della scatola nell'asse delle ordinate'
+- int : inclinazione
 '@brief: Definisce l'oggetto contenuto nella scatola(pallina)'
 - Pallina oggettoScatola
 '@brief: Metodo usato per visualizzare la sabbia su schermo'
