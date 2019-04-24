@@ -5,6 +5,7 @@
  */
 package es.sabbia_scatola;
 
+import java.util.ArrayList;
 import processing.core.*;
 
 /**
@@ -13,23 +14,18 @@ import processing.core.*;
  */
 public class ThScatola extends Thread{
 
-    int sandQuantity;
-    int perSabbia; //percentuale sabbia
-    float inclinazione; //inclinazione asse y nel punto CENTRE,CENTRE dello schermo
-    int id;
-    boolean ball;
-    DatiCondivisi ptrDati;
+    
+    private DatiCondivisi ptrDati;
+    private Scatole[] array;
+    private int id;
+    
 
-    public ThScatola(int sandQuantity, int perSabbia, float inclinazione, int id, boolean ball, DatiCondivisi ptrDati) {
-        this.sandQuantity = sandQuantity;
-        this.perSabbia = perSabbia;
-        this.inclinazione = inclinazione;
+    public ThScatola(DatiCondivisi ptrDati, int id) {
         this.id = id;
-        this.ball = ball;
         this.ptrDati = ptrDati;
+        array= ptrDati.getArray();
+        
     }
-
-   
 
     public ThScatola() {
 
@@ -37,10 +33,33 @@ public class ThScatola extends Thread{
     
     public void run(){
         while(true){
-            
+                array[id].
+            if(array[id].getSabbiaPersa()>0){
+                sandQuantity-=sabbiaPersa;
+                
+                if(ptrDati.getInclinazioneY()>0){
+                    idTarget=id+1;
+                }
+                sabbiaPersa=0;
+            }
+            else{
+            //
+            }
         
         }
     }
+
+    public int getSabbiaPersa() {
+        return sabbiaPersa;
+    }
+    
+     public void setSabbiaPersa(int sabbiaPersa) {
+        this.sabbiaPersa = sabbiaPersa;
+    }
+    
+    
+    
+    
 
     // public DatiCondivisi(){
     //}
@@ -96,5 +115,9 @@ public class ThScatola extends Thread{
         return (255 * perSabbia) / 100;
 
     }*/
+
+   
+
+    
 
 }
