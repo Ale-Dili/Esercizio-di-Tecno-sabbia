@@ -85,12 +85,19 @@ public class Sensore {
                 System.out.print(";");
             }
         });
-
+        JButton resetB = new JButton("Reset");   
+         resetB.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+               slider.setValue(0);
+            }
+        });
         // add the buttons to the panel      
         controls.add(pickColor);
         controls.add(incBtn);
         controls.add(delBtn);
         controls.add(slider);
+        controls.add(resetB);
         // add the panel to the frame
         frame.add(controls);
         frame.setSize(400, 150);
