@@ -12,17 +12,36 @@ package es.sabbia_scatola;
 public class DatiCondivisi {
 
     private int lungS, altS; //dimensioni schermo
-    private int lungB, altB; //dimensioni scatola
+    private int lungB, altB, profB; //dimensioni scatola
     private int perSabbia; //percentuale sabbia
     private Sensore s=new Sensore();
 
-    public DatiCondivisi(int lungS, int altS, int lungB, int altB, int perSabbia) {
+    public DatiCondivisi(int lungS, int altS, int lungB, int altB,int profB, int perSabbia) {
         this.lungS = lungS;
         this.altS = altS;
         this.lungB = lungB;
         this.altB = altB;
         this.perSabbia = perSabbia;
+        this.profB = profB;
     }
+
+    public void setProfB(int profB) {
+        this.profB = profB;
+    }
+
+    public void setS(Sensore s) {
+        this.s = s;
+    }
+
+    public int getProfB() {
+        return profB;
+    }
+
+    public Sensore getS() {
+        return s;
+    }
+
+    
 
 
     public float getInclinazioneX() {
@@ -84,6 +103,3 @@ public class DatiCondivisi {
     public int getPerSabbia() {
         return perSabbia;
     }
-
-
-}
