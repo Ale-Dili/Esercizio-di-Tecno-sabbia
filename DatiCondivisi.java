@@ -5,6 +5,8 @@
  */
 package es.sabbia_scatola;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Alessandro
@@ -15,6 +17,7 @@ public class DatiCondivisi {
     private int lungB, altB, profB; //dimensioni scatola
     private int perSabbia; //percentuale sabbia
     private Sensore s=new Sensore();
+    private Scatole[] array;
 
     public DatiCondivisi(int lungS, int altS, int lungB, int altB,int profB, int perSabbia) {
         this.lungS = lungS;
@@ -23,6 +26,8 @@ public class DatiCondivisi {
         this.altB = altB;
         this.perSabbia = perSabbia;
         this.profB = profB;
+        array = new Scatole[2];
+        
     }
 
     public void setProfB(int profB) {
@@ -103,3 +108,17 @@ public class DatiCondivisi {
     public int getPerSabbia() {
         return perSabbia;
     }
+
+    public Scatole[] getArray() {
+        return array;
+    }
+
+    public void setArray(Scatole[] array) {
+        this.array = array;
+    }
+
+   
+    
+
+
+}
