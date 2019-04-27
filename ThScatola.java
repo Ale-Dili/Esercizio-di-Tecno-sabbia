@@ -12,58 +12,62 @@ import processing.core.*;
  *
  * @author Alessandro
  */
-public class ThScatola extends Thread{
+public class ThScatola extends Thread {
 
-    
     private DatiCondivisi ptrDati;
     private Scatole[] array;
     private int id;
-    
 
     public ThScatola(DatiCondivisi ptrDati, int id) {
         this.id = id;
         this.ptrDati = ptrDati;
-        array= ptrDati.getArray();
-        
+        array = ptrDati.getArray();
+
     }
 
     public ThScatola() {
 
     }
-    
-    public void run(){
-        while(true){
-                array[id].
-            if(array[id].getSabbiaPersa()>0){
-                sandQuantity-=sabbiaPersa;
-                
-                if(ptrDati.getInclinazioneY()>0){
-                    idTarget=id+1;
+
+    public void run() {
+        while (true) {
+            array[id].move();
+            array[id].setSabbiaPersa(array[id].getSabbiaSpostata());
+            if (array[id].getSabbiaPersa() > 0) {
+                float persa = array[id].getSandQuantity() - array[id].getSabbiaPersa();
+                array[id].setSandQuantity(persa);
+
+                if (ptrDati.getInclinazioneY() > 0) {
+                    if (id == 1) {
+                        array[id].setIdTarget(id + 1);
+                        array[array[id].getIdTarget()].setSandQuantity(array[array[id].getIdTarget()].getSandQuantity() + array[id].getSabbiaPersa());
+                    }//
                 }
-                sabbiaPersa=0;
+                if (ptrDati.getInclinazioneY() > 0) {
+                    if (id == 1) {
+                        array[id].setIdTarget(id - 1);
+                        array[array[id].getIdTarget()].setSandQuantity(array[array[id].getIdTarget()].getSandQuantity() + array[id].getSabbiaPersa());
+                    } //
+                }
+                array[id].setSabbiaPersa(0);
+            } else {
+                //
             }
-            else{
-            //
-            }
-        
+            //-------------------------------------------------------------SETTARE NUOVAMENTE L'ARRAY
         }
     }
 
-    public int getSabbiaPersa() {
+    /* public int getSabbiaPersa() {
         return sabbiaPersa;
     }
     
      public void setSabbiaPersa(int sabbiaPersa) {
         this.sabbiaPersa = sabbiaPersa;
     }
-    
-    
-    
-    
-
+     */
     // public DatiCondivisi(){
     //}
-  /*  public int getLungS() {
+    /*  public int getLungS() {
         return lungS;
     }
 
@@ -115,9 +119,4 @@ public class ThScatola extends Thread{
         return (255 * perSabbia) / 100;
 
     }*/
-
-   
-
-    
-
 }
