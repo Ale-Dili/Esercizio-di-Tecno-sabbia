@@ -11,7 +11,8 @@ package es.sabbia_scatola;
  *
  */
 public class Sabbia {
-
+    
+    
     private double SabbiaSpostata;
     DatiCondivisi c = new DatiCondivisi();
  
@@ -21,17 +22,10 @@ public class Sabbia {
 
 //riceve da sensore l'inclinazione tramite get in dati condivisi, in seguito controlla se l'inclinazione é sufficente per lo spostamento della sabbia, poi manda la quantita' di sabbia a thscatola tramite dati condivisi
     public void move() {
-        if (c.getInclinazioneX() > 10) {
-            SabbiaSpostata = 0.2 * c.getInclinazioneX();
+        if (c.getInclinazioneY() > 10) {
+            SabbiaSpostata = 0.2 * c.getInclinazioneY();
         }
     }
 
-    public void setC(DatiCondivisi c) {
-        this.c = c;
-    }
-
-    public DatiCondivisi getC() {
-        return c;
-    }
 
 }
