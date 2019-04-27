@@ -27,7 +27,7 @@ public class Sabbia {
         }
     }
 
-    public double getSabbiaSpostata() {
+    public float getSabbiaSpostata() {
         return SabbiaSpostata;
     }
 
