@@ -10,17 +10,17 @@ package es.sabbia_scatola;
  * @author Alessandro
  */
 public class Scatole {
-    int sandQuantity;
+    float sandQuantity;
     int perSabbia; //percentuale sabbia
     int id;
     boolean ballTF;
     DatiCondivisi ptrDati;
     Pallina ball;
     Sabbia sand;
-    int sabbiaPersa;
+    float sabbiaPersa;
     int idTarget;
 
-    public Scatole(int sandQuantity, int perSabbia, int id, boolean ballTF, DatiCondivisi ptrDati, Pallina ball, Sabbia sand, int sabbiaPersa, int idTarget) {
+    public Scatole(float sandQuantity, int perSabbia, int id, boolean ballTF, DatiCondivisi ptrDati, Pallina ball, Sabbia sand, float sabbiaPersa, int idTarget) {
         this.sandQuantity = sandQuantity;
         this.perSabbia = perSabbia;
         this.id = id;
@@ -32,7 +32,7 @@ public class Scatole {
         this.idTarget = idTarget;
     }
 
-    public void setSandQuantity(int sandQuantity) {
+    public void setSandQuantity(float sandQuantity) {
         this.sandQuantity = sandQuantity;
     }
 
@@ -60,7 +60,7 @@ public class Scatole {
         this.sand = sand;
     }
 
-    public void setSabbiaPersa(int sabbiaPersa) {
+    public void setSabbiaPersa(float sabbiaPersa) {
         this.sabbiaPersa = sabbiaPersa;
     }
 
@@ -68,7 +68,7 @@ public class Scatole {
         this.idTarget = idTarget;
     }
 
-    public int getSandQuantity() {
+    public float getSandQuantity() {
         return sandQuantity;
     }
 
@@ -96,7 +96,7 @@ public class Scatole {
         return sand;
     }
 
-    public int getSabbiaPersa() {
+    public float getSabbiaPersa() {
         return sabbiaPersa;
     }
 
@@ -104,5 +104,14 @@ public class Scatole {
         return idTarget;
     }
     
+    public void move(){
+        sand.move();
+    }
+
+    public float getSabbiaSpostata(){
+        return sand.getSabbiaSpostata();
+    }
+    
     
 }
+
