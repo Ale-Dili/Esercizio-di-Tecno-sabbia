@@ -19,17 +19,50 @@ public class Scatole {
     Sabbia sand;
     float sabbiaPersa;
     int idTarget;
+    private int lungB, altB, profB; //dimensioni scatola
 
-    public Scatole(float sandQuantity, int perSabbia, int id, boolean ballTF, DatiCondivisi ptrDati, Pallina ball, Sabbia sand, float sabbiaPersa, int idTarget) {
+    public int getLungB() {
+        return lungB;
+    }
+
+    public int getAltB() {
+        return altB;
+    }
+
+    public int getProfB() {
+        return profB;
+    }
+
+    public void setLungB(int lungB) {
+        this.lungB = lungB;
+    }
+
+    public void setAltB(int altB) {
+        this.altB = altB;
+    }
+
+    public void setProfB(int profB) {
+        this.profB = profB;
+    }
+
+    public Scatole(float sandQuantity, int perSabbia, int id, boolean ballTF, DatiCondivisi ptrDati, int lunB, int altB, int profB) {
         this.sandQuantity = sandQuantity;
         this.perSabbia = perSabbia;
         this.id = id;
         this.ballTF = ballTF;
         this.ptrDati = ptrDati;
         this.ball = ball;
-        this.sand = sand;
-        this.sabbiaPersa = sabbiaPersa;
-        this.idTarget = idTarget;
+        this.sand = new Sabbia(ptrDati);
+        this.sabbiaPersa = 0;
+        this.idTarget = -1;
+        this.lungB= lunB;
+        this.altB = altB;
+        this.profB = profB;
+    }
+    
+    
+    public Scatole(DatiCondivisi ptrDati){
+        this.ptrDati = ptrDati;
     }
 
     public void setSandQuantity(float sandQuantity) {
@@ -112,6 +145,11 @@ public class Scatole {
         return sand.getSabbiaSpostata();
     }
     
+    public float valueSand() {
+        perSabbia = (int) ((sandQuantity*100)/3375);
+        return (255 * perSabbia) / 100;
+
+    }
+    
     
 }
-
