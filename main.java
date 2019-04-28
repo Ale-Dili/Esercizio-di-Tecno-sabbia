@@ -30,11 +30,17 @@ public class EsSabbia_Scatola extends PApplet {
         //numBalls = 2;
         ptrDati= new DatiCondivisi();
         array = ptrDati.getArray();
-        ptrDati.setLungS(300);
-        ptrDati.setAltS(150);
         
-        s = new Sensore();
+        ptrDati.setLungS(300+1);            //il +1 è unicamente per vedere lo stroke (il bordo) delle scatole
+        ptrDati.setAltS(150+1);
+        
+        s = new Sensore(ptrDati);
+        
+        ThScatola th0=new ThScatola(ptrDati,0);
+        ThScatola th1=new ThScatola(ptrDati,1);
 
+        th0.start();
+        th1.start();
         for (int i = 0; i < 2; i++) {
             if (i == 0) {
                 array[i] = new Scatole(3375, 100, i, false, ptrDati, 150, 150, 150);
@@ -66,6 +72,7 @@ public class EsSabbia_Scatola extends PApplet {
         /*if (!datiC.isRunning()) {
             exit();
         }*/
+        background(119, 136, 153);
         for(int i=0;i<ptrDati.getAltS()/150;i++) {          // i --> sono righe (coordinata Y)
             for(int ii=0;ii<ptrDati.getLungS()/150;ii++) {  // ii --> sono colonne (coordinata X)
                 int id=ii+(ptrDati.getNumColonne()*i);      // id = colonnaCorrente+(numeroDelleColonne * rigaCorrente)
@@ -76,7 +83,7 @@ public class EsSabbia_Scatola extends PApplet {
             }
         }
         // clean the screen
-        //background(119, 136, 153);
+        
         //for (int i = 0; i < 2; i++) {
         //    drawBox(i);
         //}
