@@ -69,33 +69,29 @@ public class EsSabbia_Scatola extends PApplet {
         for(int i=0;i<ptrDati.getAltS()/150;i++) {
             for(int ii=0;ii<ptrDati.getLungS()/150;ii++) {
                 int id=ii+(ptrDati.getNumColonne()*i);      // id = colonnaCorrente+(numeroDelleColonne * rigaCorrente)
-                drawBox(id);
+                drawBox(id,i*150,ii*150);
                 
                 
                 
             }
         }
         // clean the screen
-        background(119, 136, 153);
-        for (int i = 0; i < 2; i++) {
-            drawBox(i);
-        }
+        //background(119, 136, 153);
+        //for (int i = 0; i < 2; i++) {
+        //    drawBox(i);
+        //}
 
     }
 
-    public void drawBox(int id) {
-        int lunB1 = array[id].getLungB();
-        int altB1 = array[id].getAltB();
+    public void drawBox(int id,int rigaPosX,int colonnaPosY) {
         
-        int lunB2 = array[id].getLungB();
-        int altB2 = array[id].getAltB();
-        int lunS = ptrDati.getLungS();
-        int altS = ptrDati.getAltS();
-
+        
+        
         stroke(0, 0, 0);
 
         fill(color(202, 188, 145, array[id].valueSand()));
         
+        rect(rigaPosX,colonnaPosY,ptrDati.getLungS(),ptrDati.getAltS());
         //rect(i*150,ii*150,lunB1,altB1); 
         
         
