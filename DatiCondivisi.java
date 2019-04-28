@@ -14,39 +14,50 @@ import java.util.ArrayList;
 public class DatiCondivisi {
 
     private int lungS, altS; //dimensioni schermo
-    private int lungB, altB, profB; //dimensioni scatola
+    private int numRighe, numColonne;
+
+    
     private int perSabbia; //percentuale sabbia
     private Sensore s=new Sensore();
     private Scatole[] array;
 
-    public DatiCondivisi(int lungS, int altS, int lungB, int altB,int profB, int perSabbia) {
+    public DatiCondivisi(int lungS, int altS, int perSabbia) {
         this.lungS = lungS;
         this.altS = altS;
-        this.lungB = lungB;
-        this.altB = altB;
+        this.numRighe=lungS/150;
+        this.numRighe=altS/150;
         this.perSabbia = perSabbia;
-        this.profB = profB;
+
         array = new Scatole[2];
         
     }
 
-    public void setProfB(int profB) {
-        this.profB = profB;
-    }
+
 
     public void setS(Sensore s) {
         this.s = s;
     }
 
-    public int getProfB() {
-        return profB;
-    }
 
     public Sensore getS() {
         return s;
     }
 
-    
+    public int getNumRighe() {
+        return numRighe;
+    }
+
+    public void setNumRighe(int numRighe) {
+        this.numRighe = numRighe;
+    }
+
+    public int getNumColonne() {
+        return numColonne;
+    }
+
+    public void setNumColonne(int numColonne) {
+        this.numColonne = numColonne;
+    }
 
 
     public float getInclinazioneX() {
@@ -77,13 +88,6 @@ public class DatiCondivisi {
         return altS;
     }
 
-    public int getLungB() {
-        return lungB;
-    }
-
-    public int getAltB() {
-        return altB;
-    }
 
     public void setLungS(int lungS) {
         this.lungS = lungS;
@@ -93,13 +97,7 @@ public class DatiCondivisi {
         this.altS = altS;
     }
 
-    public void setLungB(int lungB) {
-        this.lungB = lungB;
-    }
 
-    public void setAltB(int altB) {
-        this.altB = altB;
-    }
 
     public void setPerSabbia(int perSabbia) {
         this.perSabbia = perSabbia;
