@@ -86,7 +86,7 @@ public class EsSabbia_Scatola extends PApplet {
         fill(color(202, 188, 145, array[id].valueSand()));
         
         for(int i=0;i<900;i=i+150) {
-            for(int ii=0;ii<750;i=i+150) {
+            for(int ii=0;ii<750;ii=ii+150) {
                 if(i==)
                 rect(i,ii,lunB1,altB1);
             }
