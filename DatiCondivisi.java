@@ -24,12 +24,19 @@ public class DatiCondivisi {
     public DatiCondivisi(int lungS, int altS, int perSabbia) {
         this.lungS = lungS;
         this.altS = altS;
-        this.numRighe=lungS/150;
-        this.numRighe=altS/150;
+        this.numColonne=2;
+        this.numRighe=1;
         this.perSabbia = perSabbia;
 
         array = new Scatole[2];
         
+    }
+    
+    public DatiCondivisi() {
+        array = new Scatole[2];
+        this.perSabbia = 100;
+        this.numColonne=2;
+        this.numRighe=1;
     }
 
 
@@ -76,9 +83,7 @@ public class DatiCondivisi {
         s.setInclinazioneY(inclinazione);
     }
 
-    public DatiCondivisi() {
 
-    }
 
     public int getLungS() {
         return lungS;
