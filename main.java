@@ -28,8 +28,11 @@ public class EsSabbia_Scatola extends PApplet {
      */
     public static void main(String[] args) {
         //numBalls = 2;
-        ptrDati= new DatiCondivisi(900,750,100);
+        ptrDati= new DatiCondivisi();
         array = ptrDati.getArray();
+        ptrDati.setLungS(300);
+        ptrDati.setAltS(150);
+        
         s = new Sensore();
 
         for (int i = 0; i < 2; i++) {
@@ -63,7 +66,15 @@ public class EsSabbia_Scatola extends PApplet {
         /*if (!datiC.isRunning()) {
             exit();
         }*/
-
+        for(int i=0;i<ptrDati.getAltS()/150;i++) {
+            for(int ii=0;ii<ptrDati.getLungS()/150;ii++) {
+                int id=i+(ptrDati.getNumColonne()*ptrDati.getNumRighe());
+                drawBox(id);
+                
+                
+                
+            }
+        }
         // clean the screen
         background(119, 136, 153);
         for (int i = 0; i < 2; i++) {
@@ -85,12 +96,7 @@ public class EsSabbia_Scatola extends PApplet {
 
         fill(color(202, 188, 145, array[id].valueSand()));
         
-        for(int i=0;i<900;i=i+150) {
-            for(int ii=0;ii<750;ii=ii+150) {
-                if(i==)
-                rect(i,ii,lunB1,altB1);
-            }
-        }
+        rect(i*150,ii*150,lunB1,altB1); 
         
         
         //rect(((lunS / 2) - lunB1), ((altS / 2) - (altB1 / 2)), lunB1, altB1);
