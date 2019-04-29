@@ -15,6 +15,7 @@ public class DatiCondivisi {
 
     private int lungS, altS; //dimensioni schermo
     private int numRighe, numColonne;
+    private float value;
 
     
     private int perSabbia; //percentuale sabbia
@@ -118,6 +119,16 @@ public class DatiCondivisi {
     public void setArray(Scatole[] array) {
         this.array = array;
     }
+
+    public void setValue(int value) {
+        this.value = value;
+    }
+
+    public float getValue() {
+        return value;
+    }
+
+
 
    
     
