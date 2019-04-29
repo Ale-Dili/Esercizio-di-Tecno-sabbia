@@ -22,9 +22,14 @@ public class Sabbia {
 
 //riceve da sensore l'inclinazione tramite get in dati condivisi, in seguito controlla se l'inclinazione é sufficente per lo spostamento della sabbia, poi manda la quantita' di sabbia a thscatola tramite dati condivisi
     public void move() {
+        
         if (ptrDati.getInclinazioneY() > 10) {
             SabbiaSpostata = (float) (0.2 * ptrDati.getInclinazioneY());
         }
+        if(ptrDati.getInclinazioneY()<-10) {
+            SabbiaSpostata = (float) (0.2 * ptrDati.getInclinazioneY()) * -1;
+        }
+        
     }
 
     public float getSabbiaSpostata() {
