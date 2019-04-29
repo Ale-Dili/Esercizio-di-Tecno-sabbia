@@ -44,7 +44,6 @@ public class Sensore {
         // define the button to choose color background
         JButton pickColor = new JButton("Colore ...");
         /* pickColor.addActionListener(new ActionListener() {
-
             @Override
             public void actionPerformed(ActionEvent e) {
                 Color color = JColorChooser.showDialog(pickColor, "Color Picker", Color.RED);
@@ -55,7 +54,6 @@ public class Sensore {
         // define the button to show the animated figure
         JButton incBtn = new JButton("Incrementa");
         /*incBtn.addActionListener(new ActionListener() {
-
             @Override
             public void actionPerformed(ActionEvent e) {
                datiC.incVel();
@@ -65,7 +63,6 @@ public class Sensore {
         // define the button to hide the animated figure
         JButton delBtn = new JButton("Decrementa");
         /* delBtn.addActionListener(new ActionListener() {
-
             @Override
             public void actionPerformed(ActionEvent e) {
                datiC.decVel();
@@ -80,8 +77,8 @@ public class Sensore {
             @Override
             public void stateChanged(ChangeEvent event) {
                 float value = (float) slider.getValue();
-                setInclinazioneX(value);
-                System.out.print(getInclinazioneX());
+                datiC.setInclinazioneY(value);
+                System.out.print(datiC.getInclinazioneY());
                 System.out.print(";");
             }
         });
