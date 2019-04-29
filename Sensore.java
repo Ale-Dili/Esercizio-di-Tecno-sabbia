@@ -22,21 +22,21 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 public class Sensore {
-
+    
     private JFrame frame;
     float inclinazioneX;
     float inclinazioneY;
-
+    
     public Sensore() {
         this.inclinazioneX = 0;
         this.inclinazioneY = 0;
     }
-
+    
     public Sensore(DatiCondivisi datiC) {
-
+        
         frame = new JFrame("Controls");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
+        frame.setLocationRelativeTo(null);
         // a panel where add buttons with flow layout
         JPanel controls = new JPanel();
         controls.setLayout(new FlowLayout());
@@ -59,7 +59,7 @@ public class Sensore {
                 slider.setValue((int) (datiC.getValue() - 1));
             }
         });
-
+        
         slider.setMaximum(90);
         slider.setMinimum(-90);
         slider.setValue(0);
@@ -90,23 +90,23 @@ public class Sensore {
         frame.add(controls);
         frame.setSize(400, 150);
     }
-
+    
     public void setInclinazioneX(float inclinazioneX) {
         this.inclinazioneX = inclinazioneX;
     }
-
+    
     public void setInclinazioneY(float inclinazioneY) {
         this.inclinazioneY = inclinazioneY;
     }
-
+    
     public float getInclinazioneX() {
         return inclinazioneX;
     }
-
+    
     public float getInclinazioneY() {
         return inclinazioneY;
     }
-
+    
     public void show() {
         frame.setVisible(true);
     }
