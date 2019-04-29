@@ -40,35 +40,26 @@ public class Sensore {
         // a panel where add buttons with flow layout
         JPanel controls = new JPanel();
         controls.setLayout(new FlowLayout());
+        JSlider slider = new JSlider();
 
         // define the button to choose color background
-        JButton pickColor = new JButton("Colore ...");
-        /* pickColor.addActionListener(new ActionListener() {
+        JButton AddValue = new JButton("Aumenta");
+        AddValue.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Color color = JColorChooser.showDialog(pickColor, "Color Picker", Color.RED);
-                datiC.setColor(color.getRed(), color.getGreen(), color.getBlue());
+                slider.setValue((int) (datiC.getValue() + 1));
             }
-        });*/
+        });
 
         // define the button to show the animated figure
-        JButton incBtn = new JButton("Incrementa");
-        /*incBtn.addActionListener(new ActionListener() {
+        JButton DecValue = new JButton("Decrementa");
+        DecValue.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-               datiC.incVel();
+                slider.setValue((int) (datiC.getValue() - 1));
             }
-        });*/
+        });
 
-        // define the button to hide the animated figure
-        JButton delBtn = new JButton("Decrementa");
-        /* delBtn.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-               datiC.decVel();
-            }
-        });*/
-        JSlider slider = new JSlider();
         slider.setMaximum(90);
         slider.setMinimum(-90);
         slider.setValue(0);
@@ -77,22 +68,22 @@ public class Sensore {
             @Override
             public void stateChanged(ChangeEvent event) {
                 float value = (float) slider.getValue();
+                datiC.setValue((int) value);
                 datiC.setInclinazioneY(value);
                 System.out.print(datiC.getInclinazioneY());
                 System.out.print(";");
             }
         });
-        JButton resetB = new JButton("Reset");   
-         resetB.addActionListener(new ActionListener() {
+        JButton resetB = new JButton("Reset");
+        resetB.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-               slider.setValue(0);
+                slider.setValue(0);
             }
         });
         // add the buttons to the panel      
-        controls.add(pickColor);
-        controls.add(incBtn);
-        controls.add(delBtn);
+        controls.add(AddValue);
+        controls.add(DecValue);
         controls.add(slider);
         controls.add(resetB);
         // add the panel to the frame
