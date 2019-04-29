@@ -15,7 +15,7 @@ public class Scatole {
     int id;
     boolean ballTF;
     DatiCondivisi ptrDati;
-    Pallina ball;
+    //Pallina ball;
     Sabbia sand;
     float sabbiaPersa;
     int idTarget;
@@ -51,7 +51,7 @@ public class Scatole {
         this.id = id;
         this.ballTF = ballTF;
         this.ptrDati = ptrDati;
-        this.ball = ball;
+        //this.ball = ball;
         this.sand = new Sabbia(ptrDati);
         this.sabbiaPersa = 0;
         this.idTarget = -1;
@@ -85,9 +85,9 @@ public class Scatole {
         this.ptrDati = ptrDati;
     }
 
-    public void setBall(Pallina ball) {
-        this.ball = ball;
-    }
+    //public void setBall(Pallina ball) {
+    //    this.ball = ball;
+    //}
 
     public void setSand(Sabbia sand) {
         this.sand = sand;
@@ -121,9 +121,9 @@ public class Scatole {
         return ptrDati;
     }
 
-    public Pallina getBall() {
-        return ball;
-    }
+    //public Pallina getBall() {
+    //    return ball;
+    //}
 
     public Sabbia getSand() {
         return sand;
@@ -149,6 +149,10 @@ public class Scatole {
         perSabbia = (int) ((sandQuantity*100)/3375);
         return (255 * perSabbia) / 100;
 
+    }
+    
+    public int valueSandPixel(){
+        return perSabbia*(lungB/100);
     }
     
     
