@@ -70,8 +70,7 @@ public class DatiCondivisi {
     public float getInclinazioneX() {
         return s.getInclinazioneX();
     }
-    
-    public float getInclinazioneY() {
+     public float getInclinazioneY() {
         return s.getInclinazioneY();
     }
     
