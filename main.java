@@ -21,7 +21,7 @@ public class EsSabbia_Scatola extends PApplet {
     static ThScatola box[];
     static Scatole[] array;
 
-    private int NumEsecuzioni = 0;
+
     // dati condivisi
     //static ThBall[] thBalls;    // vettore con i threads
     //static int numBalls;        // numero di balls e di thread
@@ -112,7 +112,7 @@ public class EsSabbia_Scatola extends PApplet {
 
         colonnaPosX = colonnaPosX + array[id].getLungB() - 2;
         for (int i = 0; i < array[id].valueSandPixel(); i++) {
-            fill(color(202, 188, 145));
+            fill(202, 188, 145);
             rect(colonnaPosX, rigaPosY, 1, array[id].getAltB());
             colonnaPosX--;
             
@@ -124,3 +124,4 @@ public class EsSabbia_Scatola extends PApplet {
 
     }
 }
+
