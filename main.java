@@ -5,151 +5,114 @@
  */
 package es.sabbia_scatola;
 
-import java.util.ArrayList;
-import java.util.Timer;
-import java.util.TimerTask;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
 import processing.core.*;
 
 /**
  *
- * @author Alessandro
+ * @author scuola
  */
-public class ThScatola extends Thread {
+public class EsSabbia_Scatola extends PApplet {
 
-    private DatiCondivisi ptrDati;
-    private Scatole[] array;
-    private int id;
+    static DatiCondivisi ptrDati;
+    static Sensore s;
+    static ThScatola box[];
+    static Scatole[] array;
+    // dati condivisi
+    //static ThBall[] thBalls;    // vettore con i threads
+    //static int numBalls;        // numero di balls e di thread
 
-    public ThScatola(DatiCondivisi ptrDati, int id) {
-        this.id = id;
-        this.ptrDati = ptrDati;
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+        //numBalls = 2;
+        ptrDati= new DatiCondivisi();
         array = ptrDati.getArray();
+        
+        ptrDati.setLungS(300+1);            //il +1 è unicamente per vedere lo stroke (il bordo) delle scatole
+        ptrDati.setAltS(150+1);
+        
+        s = new Sensore(ptrDati);
+        
+        
 
-    }
-
-    public ThScatola() {
-
-    }
-
-    public void run() {
-        while (true) {
-            array[id].move();
-            array[id].setSabbiaPersa(array[id].getSabbiaSpostata());
-            
-            try {
-                Thread.sleep(10);                        //provare 5 millisecondi
-            } catch (InterruptedException ex) {
-                Logger.getLogger(ThScatola.class.getName()).log(Level.SEVERE, null, ex);
-            }
-
-                if (ptrDati.getInclinazioneY() > 0) {
-                    if (id == 0) {
-                        if (array[id].getSabbiaPersa() > 0) {
-                
-                            float newQuantity = array[id].getSandQuantity() - array[id].getSabbiaPersa();
-                            if(newQuantity<0) {
-                                newQuantity=0;
-                            }
-                            array[id].setSandQuantity(newQuantity);
-                            //System.out.println("prova:1 sandQuantity "+array[id].getSandQuantity());      //OUTPUT DI PROVA
-                            array[id].setIdTarget(id + 1);
-                            array[array[id].getIdTarget()].setSandQuantity(array[array[id].getIdTarget()].getSandQuantity() + array[id].getSabbiaPersa());
-                            
-                            
-                    }
-                }
-                }
-                if (ptrDati.getInclinazioneY() < 0) {
-                    if (id == 1) {
-                        
-                        if (array[id].getSabbiaPersa() > 0) {
-                
-                            float newQuantity2 = array[id].getSandQuantity() - array[id].getSabbiaPersa();      //DA CONTROLLARE
-                            if(newQuantity2<0) {                                                                //DA CONTROLLARE
-                                newQuantity2=0;                                                                 //DA CONTROLLARE
-                            }                                                                                   //DA CONTROLLARE
-                            array[id].setSandQuantity(newQuantity2);                                            //DA CONTROLLARE
-                            //System.out.println("prova:2 sandQuantity "+array[id].getSandQuantity());            //OUTPUT DI PROVA
-                        array[id].setIdTarget(id - 1);
-                        array[array[id].getIdTarget()].setSandQuantity(array[array[id].getIdTarget()].getSandQuantity() + array[id].getSabbiaPersa());
-                    } //
-                }
-                
+        
+        for (int i = 0; i < 2; i++) {
+            if (i == 0) {
+                array[i] = new Scatole(3375, 100, i, false, ptrDati, 150, 150, 150);
             } else {
-                //
+                array[i] = new Scatole(0, 0, i, false, ptrDati, 150, 150, 150);
             }
-                array[id].setSabbiaPersa(0);
-            ptrDati.setArray(array);
-            //-------------------------------------------------------------SETTARE NUOVAMENTE L'ARRAY
+
         }
         
+
+        PApplet.main(new String[]{"es.sabbia_scatola.EsSabbia_Scatola"});
+
+    }
+
+    public void settings() {
+        size(ptrDati.getLungS(), ptrDati.getAltS());
+        
+        ThScatola th0=new ThScatola(ptrDati,0);
+        ThScatola th1=new ThScatola(ptrDati,1);
+        
+        th0.start();
+        th1.start();
+        //ptrDati.setScreen(width, height);
+        /*for (int i = 0; i < thBalls.length; i++) {
+            thBalls[i].start();
+        }*/
+    }
+
+    public void setup() {
+        noStroke();
+        frameRate(30);
+        // ellipseMode(RADIUS);
+    }
+
+    public void draw() {
+        /*if (!datiC.isRunning()) {
+            exit();
+        }*/
+        background(119, 136, 153);
+        for(int i=0;i<ptrDati.getAltS()/150;i++) {          // i --> sono righe (coordinata Y)
+            for(int ii=0;ii<ptrDati.getLungS()/150;ii++) {  // ii --> sono colonne (coordinata X)
+                int id=ii+(ptrDati.getNumColonne()*i);      // id = colonnaCorrente+(numeroDelleColonne * rigaCorrente)
+                drawBox(id,ii*150,i*150);
+                
+                
+                
+            }
+        }
+        // clean the screen
+        
+        //for (int i = 0; i < 2; i++) {
+        //    drawBox(i);
+        //}
+
+    }
+
+    public void drawBox(int id,int colonnaPosX,int rigaPosY) {
         
         
-    }
         
-    /* public int getSabbiaPersa() {
-        return sabbiaPersa;
-    }
-    
-     public void setSabbiaPersa(int sabbiaPersa) {
-        this.sabbiaPersa = sabbiaPersa;
-    }
-     */
-    // public DatiCondivisi(){
-    //}
-    /*  public int getLungS() {
-        return lungS;
+        stroke(0, 0, 0);
+
+        fill(color(202, 188, 145, array[id].valueSand()));
+        
+        rect(colonnaPosX,rigaPosY,array[id].getLungB(),array[id].getAltB());
+        //rect(i*150,ii*150,lunB1,altB1); 
+        
+        
+        //rect(((lunS / 2) - lunB1), ((altS / 2) - (altB1 / 2)), lunB1, altB1);
+
+       // fill(color(202, 188, 145, box1.valueSand()));
+        
+        
+        //rect((lunS / 2), ((altS / 2) - (altB2 / 2)), lunB2, altB2);
     }
 
-    public int getAltS() {
-        return altS;
-    }
-
-    public int getLungB() {
-        return lungB;
-    }
-
-    public int getAltB() {
-        return altB;
-    }
-
-    public void setLungS(int lungS) {
-        this.lungS = lungS;
-    }
-
-    public void setAltS(int altS) {
-        this.altS = altS;
-    }
-
-    public void setLungB(int lungB) {
-        this.lungB = lungB;
-    }
-
-    public void setAltB(int altB) {
-        this.altB = altB;
-    }
-
-    public int getPerSabbia() {
-        return perSabbia;
-    }
-
-    public float getInclinazione() {
-        return inclinazione;
-    }
-
-    public void setPerSabbia(int perSabbia) {
-        this.perSabbia = perSabbia;
-    }
-
-    public void setInclinazione(float inclinazione) {
-        this.inclinazione = inclinazione;
-    }
-
-    public int valueSand() {
-        return (255 * perSabbia) / 100;
-
-    }*/
 }
