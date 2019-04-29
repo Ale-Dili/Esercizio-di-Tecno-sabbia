@@ -9,13 +9,11 @@ package es.sabbia_scatola;
  *
  * @author Christian
  */
-import java.awt.Color;
-import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
-import javax.swing.JColorChooser;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSlider;
 import javax.swing.event.ChangeEvent;
@@ -39,9 +37,8 @@ public class Sensore {
         frame.setLocationRelativeTo(null);
         // a panel where add buttons with flow layout
         JPanel controls = new JPanel();
-        controls.setLayout(new FlowLayout());
         JSlider slider = new JSlider();
-
+        JLabel valore = new JLabel();
         // define the button to choose color background
         JButton AddValue = new JButton("Aumenta");
         AddValue.addActionListener(new ActionListener() {
@@ -69,9 +66,8 @@ public class Sensore {
             public void stateChanged(ChangeEvent event) {
                 float value = (float) slider.getValue();
                 datiC.setValue((int) value);
+                valore.setText(Integer.toString((int) value));
                 datiC.setInclinazioneY(value);
-                System.out.print(datiC.getInclinazioneY());
-                System.out.print(";");
             }
         });
         JButton resetB = new JButton("Reset");
@@ -81,11 +77,14 @@ public class Sensore {
                 slider.setValue(0);
             }
         });
+
         // add the buttons to the panel      
         controls.add(AddValue);
         controls.add(DecValue);
         controls.add(slider);
+        controls.add(valore);
         controls.add(resetB);
+        
         // add the panel to the frame
         frame.add(controls);
         frame.setSize(400, 150);
