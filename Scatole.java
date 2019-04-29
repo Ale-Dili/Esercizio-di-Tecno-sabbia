@@ -145,6 +145,10 @@ public class Scatole {
         return sand.getSabbiaSpostata();
     }
     
+    public void setSabbiaSpostata(){
+        sand.setSabbiaSpostata(0);
+    }
+    
     public float valueSand() {
         perSabbia = (int) ((sandQuantity*100)/3375);
         return (255 * perSabbia) / 100;
@@ -152,7 +156,8 @@ public class Scatole {
     }
     
     public int valueSandPixel(){
-        return perSabbia*(lungB/100);
+        float temp=((float)lungB)/100;
+        return (int) (perSabbia * temp);
     }
     
     
