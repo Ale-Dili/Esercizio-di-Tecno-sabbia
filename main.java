@@ -17,9 +17,11 @@ public class EsSabbia_Scatola extends PApplet {
 
     static DatiCondivisi ptrDati;
     static Sensore s;
-    
+
     static ThScatola box[];
     static Scatole[] array;
+
+    private int NumEsecuzioni = 0;
     // dati condivisi
     //static ThBall[] thBalls;    // vettore con i threads
     //static int numBalls;        // numero di balls e di thread
@@ -75,11 +77,11 @@ public class EsSabbia_Scatola extends PApplet {
             exit();
         }*/
         background(119, 136, 153);
-        for (int i = 0; i < ptrDati.getAltS() / 150; i++) {          // i --> sono righe (coordinata Y)
-            for (int ii = 0; ii < ptrDati.getLungS() / 150; ii++) {  // ii --> sono colonne (coordinata X)
+        for (int i = 0; i < (int) (ptrDati.getAltS() / 150); i++) {          // i --> sono righe (coordinata Y)
+            for (int ii = 0; ii < (int) (ptrDati.getLungS() / 150); ii++) {  // ii --> sono colonne (coordinata X)
                 int id = ii + (ptrDati.getNumColonne() * i);      // id = colonnaCorrente+(numeroDelleColonne * rigaCorrente)
                 drawBoxPixel(id, ii * 150, i * 150);
-
+                //drawBox(id, ii*150,i*150);
             }
         }
         // clean the screen
@@ -90,40 +92,35 @@ public class EsSabbia_Scatola extends PApplet {
     }
 
     public void drawBox(int id, int colonnaPosX, int rigaPosY) {
-
         stroke(0, 0, 0);
-       // noFill();
-       fill(color(202, 188, 145, array[id].valueSand()));
+        // noFill();
+        fill(color(202, 188, 145, array[id].valueSand()));
 
         rect(colonnaPosX, rigaPosY, array[id].getLungB(), array[id].getAltB());
-        
-        
         //rect(i*150,ii*150,lunB1,altB1); 
-
         //rect(((lunS / 2) - lunB1), ((altS / 2) - (altB1 / 2)), lunB1, altB1);
         // fill(color(202, 188, 145, box1.valueSand()));
         //rect((lunS / 2), ((altS / 2) - (altB2 / 2)), lunB2, altB2);
     }
 
     public void drawBoxPixel(int id, int colonnaPosX, int rigaPosY) {
-        int percentuale = array[id].getPerSabbia();
-        float inclinazione = ptrDati.getInclinazioneY();
-        
-        //stroke(0, 0, 0);
-        
-        if (inclinazione > 0) {
-            colonnaPosX=colonnaPosX+array[id].getLungB()-1;
-            for(int i=0; i<array[id].valueSandPixel(); i++){
-                fill(color(202, 188, 145));
-                rect(colonnaPosX, rigaPosY, 1, array[id].getAltB());
-                colonnaPosX--;
-            }
+        stroke(0, 0, 0);
+        // noFill();
+        //fill(color(202, 188, 145, array[id].valueSand()));
+
+        rect(colonnaPosX, rigaPosY, array[id].getLungB(), array[id].getAltB());
+
+        colonnaPosX = colonnaPosX + array[id].getLungB() - 2;
+        for (int i = 0; i < array[id].valueSandPixel(); i++) {
+            fill(color(202, 188, 145));
+            rect(colonnaPosX, rigaPosY, 1, array[id].getAltB());
+            colonnaPosX--;
+            
         }
 
-        
         stroke(0, 0, 0);
         noFill();
-        rect(colonnaPosX, rigaPosY, array[id].getLungB(), array[id].getAltB());
-    }
+        //rect(colonnaPosX, rigaPosY, array[id].getLungB(), array[id].getAltB());
 
+    }
 }
