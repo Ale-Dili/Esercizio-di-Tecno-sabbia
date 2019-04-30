@@ -5,161 +5,123 @@
  */
 package es.sabbia_scatola;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Alessandro
  */
-public class Scatole {
+public class DatiCondivisi {
 
-    float sandQuantity;
-    int perSabbia; //percentuale sabbia
-    int id;
-    boolean ballTF;
-    DatiCondivisi ptrDati;
-    //Pallina ball;
-    Sabbia sand;
-    Pallina ball;
-    float sabbiaPersa;
-    int idTarget;
-    private int lungB, altB, profB; //dimensioni scatola
+    private int lungS, altS; //dimensioni schermo
+    private int numRighe, numColonne;
 
-    public int getLungB() {
-        return lungB;
-    }
+    
+    private int perSabbia; //percentuale sabbia
+    private Sensore s=new Sensore();
+    private Scatole[] array;
 
-    public int getAltB() {
-        return altB;
-    }
-
-    public int getProfB() {
-        return profB;
-    }
-
-    public void setLungB(int lungB) {
-        this.lungB = lungB;
-    }
-
-    public void setAltB(int altB) {
-        this.altB = altB;
-    }
-
-    public void setProfB(int profB) {
-        this.profB = profB;
-    }
-
-    public Scatole(float sandQuantity, int perSabbia, int id, boolean ballTF, DatiCondivisi ptrDati, int lunB, int altB, int profB) {
-        this.sandQuantity = sandQuantity;
+    public DatiCondivisi(int lungS, int altS, int perSabbia) {
+        this.lungS = lungS;
+        this.altS = altS;
+        this.numColonne=2;
+        this.numRighe=1;
         this.perSabbia = perSabbia;
-        this.id = id;
-        this.ballTF = ballTF;
-        this.ptrDati = ptrDati;
-        this.ball = new Pallina(ptrDati);
-        this.sand = new Sabbia(ptrDati);
-        this.sabbiaPersa = 0;
-        this.idTarget = -1;
-        this.lungB = lunB;
-        this.altB = altB;
-        this.profB = profB;
+
+        array = new Scatole[2];
+        
+    }
+    
+    public DatiCondivisi() {
+        array = new Scatole[2];
+        this.perSabbia = 100;
+        this.numColonne=2;
+        this.numRighe=1;
     }
 
-    public Scatole(DatiCondivisi ptrDati) {
-        this.ptrDati = ptrDati;
+
+
+    public void setS(Sensore s) {
+        this.s = s;
     }
 
-    public void setSandQuantity(float sandQuantity) {
-        this.sandQuantity = sandQuantity;
+
+    public Sensore getS() {
+        return s;
     }
+
+    public int getNumRighe() {
+        return numRighe;
+    }
+
+    public void setNumRighe(int numRighe) {
+        this.numRighe = numRighe;
+    }
+
+    public int getNumColonne() {
+        return numColonne;
+    }
+
+    public void setNumColonne(int numColonne) {
+        this.numColonne = numColonne;
+    }
+
+
+    public float getInclinazioneX() {
+        return s.getInclinazioneX();
+    }
+     public float getInclinazioneY() {
+        return s.getInclinazioneY();
+    }
+    
+    public void setInclinazioneX(float inclinazione) {
+        s.setInclinazioneX(inclinazione);
+    }
+    
+    public void setInclinazioneY(float inclinazione) {
+        s.setInclinazioneY(inclinazione);
+    }
+
+
+
+    public int getLungS() {
+        return lungS;
+    }
+
+    public int getAltS() {
+        return altS;
+    }
+
+
+    public void setLungS(int lungS) {
+        this.lungS = lungS;
+    }
+
+    public void setAltS(int altS) {
+        this.altS = altS;
+    }
+
+
 
     public void setPerSabbia(int perSabbia) {
         this.perSabbia = perSabbia;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public void setBallTF(boolean ballTF) {
-        this.ballTF = ballTF;
-    }
-
-    public void setPtrDati(DatiCondivisi ptrDati) {
-        this.ptrDati = ptrDati;
-    }
-
-    public void setBall(Pallina ball) {
-        this.ball = ball;
-    }
-
-    public void setSand(Sabbia sand) {
-        this.sand = sand;
-    }
-
-    public void setSabbiaPersa(float sabbiaPersa) {
-        this.sabbiaPersa = sabbiaPersa;
-    }
-
-    public void setIdTarget(int idTarget) {
-        this.idTarget = idTarget;
-    }
-
-    public float getSandQuantity() {
-        return sandQuantity;
     }
 
     public int getPerSabbia() {
         return perSabbia;
     }
 
-    public int getId() {
-        return id;
+    public Scatole[] getArray() {
+        return array;
     }
 
-    public boolean isBallTF() {
-        return ballTF;
+    public void setArray(Scatole[] array) {
+        this.array = array;
     }
 
-    public DatiCondivisi getPtrDati() {
-        return ptrDati;
-    }
+   
+    
+    
 
-    public Pallina getBall() {
-        return ball;
-    }
-
-    public Sabbia getSand() {
-        return sand;
-    }
-
-    public float getSabbiaPersa() {
-        return sabbiaPersa;
-    }
-
-    public int getIdTarget() {
-        return idTarget;
-    }
-
-    public void move() {
-        sand.move();
-        ball.Move();
-    }
-
-    public float getSabbiaSpostata() {
-        return sand.getSabbiaSpostata();
-    }
-
-    public void setSabbiaSpostata() {
-        sand.setSabbiaSpostata(0);
-    }
-
-    public float valueSand() {
-        perSabbia = (int) ((sandQuantity * 100) / 3375);
-        return (255 * perSabbia) / 100;
-
-    }
-
-    public int valueSandPixel() {
-        float temp = ((float) lungB) / 100;
-        return (int) (perSabbia * temp);
-    }
 
 }
