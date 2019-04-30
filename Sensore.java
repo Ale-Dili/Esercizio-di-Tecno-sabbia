@@ -20,7 +20,6 @@ import javax.swing.JPanel;
 import javax.swing.JSlider;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
-
 public class Sensore {
 
     private JFrame frame;
@@ -32,6 +31,11 @@ public class Sensore {
         this.inclinazioneY = 0;
     }
 
+    /**
+     *
+     * Metodo costruttore con parametri che si occupa di creare i componenti del frame, definendone tutte le caratteristiche fisiche e gli eventi da loro eseguiti.
+     *
+     */
     public Sensore(DatiCondivisi datiC) {
 
         frame = new JFrame("Controls");
@@ -40,11 +44,17 @@ public class Sensore {
         int x = (int) ((dimension.getWidth() - frame.getWidth()) / 2);
         int y = (int) ((dimension.getHeight() - frame.getHeight())/1.5 );
         frame.setLocation(x, y);
-        // a panel where add buttons with flow layout
+        // creazione di panel all'interno del quale vengono aggiunti i pulsanti.
         JPanel controls = new JPanel();
         JSlider slider = new JSlider();
         JLabel valore = new JLabel();
-        // define the button to choose color background
+        valore.setText("0");
+        
+        /**
+         *
+         * Creazione del bottone "Aumenta" che quando viene premuto incrementa di 1 il valore dell'inclinazione sull'asse delle y e setta con il nuovo valore lo slider.
+         *
+         */
         JButton AddValue = new JButton("Aumenta");
         AddValue.addActionListener(new ActionListener() {
             @Override
@@ -53,7 +63,11 @@ public class Sensore {
             }
         });
 
-        // define the button to show the animated figure
+        /**
+         *
+         * Creazione del bottone "Decrementa" che quando viene premuto decrementa di 1 il valore dell'inclinazione sull'asse delle y e setta con il nuovo valore lo slider.
+         *
+         */
         JButton DecValue = new JButton("Decrementa");
         DecValue.addActionListener(new ActionListener() {
             @Override
@@ -82,34 +96,59 @@ public class Sensore {
             }
         });
 
-        // add the buttons to the panel      
+        // aggiungono i bottoni al panel    
         controls.add(AddValue);
         controls.add(DecValue);
         controls.add(resetB);
         controls.add(slider);
         controls.add(valore);
 
-        // add the panel to the frame
+        // aggiunge panel al frame
         frame.add(controls);
         frame.setSize(400, 120);
     }
 
+    /**
+     *
+     * Metodo set che permette di settare l'inclinazione sull'asse delle x
+     *
+     */
     public void setInclinazioneX(float inclinazioneX) {
         this.inclinazioneX = inclinazioneX;
     }
 
+    /**
+     *
+     * Metodo set che permette di settare l'inclinazione sull'asse delle y
+     *
+     */
     public void setInclinazioneY(float inclinazioneY) {
         this.inclinazioneY = inclinazioneY;
     }
 
+    /**
+     *
+     * Metodo get che fa ritornare l'inclinazione sull'asse delle x
+     *
+     */
     public float getInclinazioneX() {
         return inclinazioneX;
     }
 
+    /**
+     *
+     * Metodo get che fa ritornare l'inclinazione sull'asse delle y
+     *
+     */
     public float getInclinazioneY() {
         return inclinazioneY;
     }
 
+    /**
+     *
+     * Metodo che rende visibile il frame
+     *
+     */
     public void show() {
         frame.setVisible(true);
     }
