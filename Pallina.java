@@ -30,7 +30,7 @@ public class Pallina {
 
     private DatiCondivisi ptrDati;
 
-    Timer timer = new Timer();
+    private int cont=0;  //PROVA
 
     /*@brief: Costruttore senza parametri, posiziono la pallina al centro della scatola e le sue velocità a 0*/
     public Pallina(DatiCondivisi dati) {
@@ -138,7 +138,7 @@ public class Pallina {
 
     public void Move() {
         if (ptrDati.getInclinazioneY() > 10) {
-            posX = posX + (float) (velX * direzioneX);
+            posX = posX + (float) ((velX * direzioneX)*(ptrDati.getInclinazioneY()/10));
             posY = posY + (float) (velY * direzioneY);
 
             if (posX >= 150 - Raggio) {
@@ -146,7 +146,7 @@ public class Pallina {
             }
         }
         if(ptrDati.getInclinazioneY() < -10) {
-            posX = posX + (float) (velX * direzioneX);
+            posX = posX + (float) ((velX * direzioneX)*(ptrDati.getInclinazioneY()));
             posY = posY + (float) (velY * direzioneY);
 
             if (posX >= 150 - Raggio) {
@@ -160,10 +160,17 @@ public class Pallina {
     }
 
     public void IncrementaVelocitàX() {
-        velX += 0.05;
-        if(velX<0.4) {
-            velX=0.4;
+        if(cont==20) {
+           velX += 0.02;
+            if(velX<0.2) {
+                velX=0.2;
+            } 
+            cont=0;
         }
+        else {
+            cont++;
+        }
+        
     }
 
     public void IncrementaVelocitàY() {
@@ -188,12 +195,14 @@ public class Pallina {
         return "PosizioneX: " + String.valueOf(posX) + "/PosizioneY:" + String.valueOf(posY) + "/VelocitàX:" + String.valueOf(velX) + "/VelocitàY:" + String.valueOf(velY);
     }
 
-    public class TimerTask {
+    private class Compito {
 
         public void run() {
 
         }
     }
+    
 }
+
 
 
