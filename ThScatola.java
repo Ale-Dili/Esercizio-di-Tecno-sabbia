@@ -49,7 +49,12 @@ public class ThScatola extends Thread {
 
             if (ptrDati.getInclinazioneY() > 0) {
                 
-                array[id].getBall().IncrementaVelocitàX();
+                if(ptrDati.getInclinazioneY()<11) {
+                
+                }
+                else {
+                    array[id].getBall().IncrementaVelocitàX();
+                }
                 
                 if (id == 0) {
                     if (array[id].getSabbiaPersa() > 0) {
