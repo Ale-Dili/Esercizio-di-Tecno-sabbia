@@ -10,6 +10,7 @@ package es.sabbia_scatola;
  * @author Alessandro
  */
 public class Scatole {
+
     float sandQuantity;
     int perSabbia; //percentuale sabbia
     int id;
@@ -17,6 +18,7 @@ public class Scatole {
     DatiCondivisi ptrDati;
     //Pallina ball;
     Sabbia sand;
+    Pallina ball;
     float sabbiaPersa;
     int idTarget;
     private int lungB, altB, profB; //dimensioni scatola
@@ -51,17 +53,16 @@ public class Scatole {
         this.id = id;
         this.ballTF = ballTF;
         this.ptrDati = ptrDati;
-        //this.ball = ball;
+        this.ball = new Pallina(ptrDati);
         this.sand = new Sabbia(ptrDati);
         this.sabbiaPersa = 0;
         this.idTarget = -1;
-        this.lungB= lunB;
+        this.lungB = lunB;
         this.altB = altB;
         this.profB = profB;
     }
-    
-    
-    public Scatole(DatiCondivisi ptrDati){
+
+    public Scatole(DatiCondivisi ptrDati) {
         this.ptrDati = ptrDati;
     }
 
@@ -85,9 +86,9 @@ public class Scatole {
         this.ptrDati = ptrDati;
     }
 
-    //public void setBall(Pallina ball) {
-    //    this.ball = ball;
-    //}
+    public void setBall(Pallina ball) {
+        this.ball = ball;
+    }
 
     public void setSand(Sabbia sand) {
         this.sand = sand;
@@ -121,9 +122,9 @@ public class Scatole {
         return ptrDati;
     }
 
-    //public Pallina getBall() {
-    //    return ball;
-    //}
+    public Pallina getBall() {
+        return ball;
+    }
 
     public Sabbia getSand() {
         return sand;
@@ -136,29 +137,29 @@ public class Scatole {
     public int getIdTarget() {
         return idTarget;
     }
-    
-    public void move(){
+
+    public void move() {
         sand.move();
+        ball.Move();
     }
 
-    public float getSabbiaSpostata(){
+    public float getSabbiaSpostata() {
         return sand.getSabbiaSpostata();
     }
-    
-    public void setSabbiaSpostata(){
+
+    public void setSabbiaSpostata() {
         sand.setSabbiaSpostata(0);
     }
-    
+
     public float valueSand() {
-        perSabbia = (int) ((sandQuantity*100)/3375);
+        perSabbia = (int) ((sandQuantity * 100) / 3375);
         return (255 * perSabbia) / 100;
 
     }
-    
-    public int valueSandPixel(){
-        float temp=((float)lungB)/100;
+
+    public int valueSandPixel() {
+        float temp = ((float) lungB) / 100;
         return (int) (perSabbia * temp);
     }
-    
-    
+
 }
