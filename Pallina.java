@@ -137,11 +137,21 @@ public class Pallina {
     }
 
     public void Move() {
-        posX = posX + (float) (velX * direzioneX);
-        posY = posY + (float) (velY * direzioneY);
+        if (ptrDati.getInclinazioneY() > 10) {
+            posX = posX + (float) (velX * direzioneX);
+            posY = posY + (float) (velY * direzioneY);
 
-        if (posX >= 150 - Raggio) {
-            posX = 150 - Raggio;
+            if (posX >= 150 - Raggio) {
+                posX = 150 - Raggio;
+            }
+        }
+        if(ptrDati.getInclinazioneY() < -10) {
+            posX = posX + (float) (velX * direzioneX);
+            posY = posY + (float) (velY * direzioneY);
+
+            if (posX >= 150 - Raggio) {
+                posX = 150 - Raggio;
+            }
         }
         /*if(posY>=HEIGHT_SCREEN-Raggio) {
             posY=HEIGHT_SCREEN-Raggio;              //FUTURO
@@ -150,7 +160,10 @@ public class Pallina {
     }
 
     public void IncrementaVelocitàX() {
-        velX += 0.2 * ptrDati.getInclinazioneY();
+        velX += 0.05;
+        if(velX<0.4) {
+            velX=0.4;
+        }
     }
 
     public void IncrementaVelocitàY() {
@@ -182,4 +195,5 @@ public class Pallina {
         }
     }
 }
+
 
