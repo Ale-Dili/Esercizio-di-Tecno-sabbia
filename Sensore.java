@@ -9,6 +9,8 @@ package es.sabbia_scatola;
  *
  * @author Christian
  */
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
@@ -34,7 +36,10 @@ public class Sensore {
 
         frame = new JFrame("Controls");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setLocationRelativeTo(null);
+        Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
+        int x = (int) ((dimension.getWidth() - frame.getWidth()) / 2);
+        int y = (int) ((dimension.getHeight() - frame.getHeight())/1.5 );
+        frame.setLocation(x, y);
         // a panel where add buttons with flow layout
         JPanel controls = new JPanel();
         JSlider slider = new JSlider();
