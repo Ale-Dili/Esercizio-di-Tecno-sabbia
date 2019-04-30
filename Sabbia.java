@@ -25,9 +25,11 @@ public class Sabbia {
         
         if (ptrDati.getInclinazioneY() > 10) {
             SabbiaSpostata = (float) (0.2 * ptrDati.getInclinazioneY());
+            //System.out.println("prova1 "+ptrDati.getInclinazioneY());             OUTPUT DI PROVA
         }
         if(ptrDati.getInclinazioneY()<-10) {
             SabbiaSpostata = (float) (0.2 * ptrDati.getInclinazioneY()) * -1;
+            //System.out.println("prova2 "+ptrDati.getInclinazioneY());             OUTPUT DI PROVA
         }
         
     }
