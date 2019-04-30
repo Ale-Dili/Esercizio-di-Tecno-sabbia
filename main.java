@@ -18,7 +18,7 @@ public class EsSabbia_Scatola extends PApplet {
     static DatiCondivisi ptrDati;
     static Sensore s;
 
-    static ThScatola box[];
+    static ThScatola box[]; 
     static Scatole[] array;
 
     // dati condivisi
@@ -136,3 +136,4 @@ public class EsSabbia_Scatola extends PApplet {
             noFill();
     }
     }
+
