@@ -7,19 +7,12 @@ package es.sabbia_scatola;
 
 import java.util.Timer;
 
-
-
-
-
-
-
-
-
 /**
  *
  * @author Luca
  */
 public class Pallina {
+
     /*@brief: Posizione della pallina sull'asse delle x*/
     private float posX;
     /*@brief: Posizione della pallina sull'asse delle y*/
@@ -28,37 +21,35 @@ public class Pallina {
     private double velX;
     /*@brief: Velocità della pallina sull'asse delle y*/
     private double velY;
-    
+
     private int Raggio;
-    
+
     private int direzioneX;
-    
+
     private int direzioneY;
-    
+
     private DatiCondivisi ptrDati;
-    
-    Timer timer=new Timer();
-    
-    
+
+    Timer timer = new Timer();
+
     /*@brief: Costruttore senza parametri, posiziono la pallina al centro della scatola e le sue velocità a 0*/
     public Pallina(DatiCondivisi dati) {
-        this.ptrDati=dati;
-        this.Raggio=20;
-        this.posX=ptrDati.getLungB()/2;          //Cambiare in base a lunghezza della scatola
-        this.posY=ptrDati.getAltB()/2;          //Cambiare in base a larghezza della scatola
-        this.velX=0;
-        this.velY=0;   
+        this.ptrDati = dati;
+        this.Raggio = 20;
+        this.posX = 150 / 2;          //Cambiare in base a lunghezza della scatola
+        this.posY = 150 / 2;          //Cambiare in base a larghezza della scatola
+        this.velX = 0;
+        this.velY = 0;
         /*Genero un numero random tra 0 e 2 (0,1), poi calcolo il resto della divisione con il numero 2 facendo il modulo(%),
           in questo modo ho il 50% di possibilità che la direzione sia 1(da sinistra a destra) o -1(da destra a sinistra)
-        */
-        if(ptrDati.getInclinazioneX()<0) {
-            direzioneX=-1;       //sinistra --> destra
-        }
-        else {
-            direzioneX=1;      //destra --> sinistra
+         */
+        if (ptrDati.getInclinazioneX() < 0) {
+            direzioneX = -1;       //sinistra --> destra
+        } else {
+            direzioneX = 1;      //destra --> sinistra
         }
         /*Uguale a sopra*/
-        /*if((int) ((Math.random()*2)%2)==0) {
+ /*if((int) ((Math.random()*2)%2)==0) {
             direzioneY=1;       //sopra --> sotto
         }
         else {                                              //PER FUTURA INCLINAZIONE SULL'ASSE DELLE Y
@@ -67,11 +58,10 @@ public class Pallina {
         
         WIDTH_SCREEN=900;
         HEIGHT_SCREEN=900;
-        */
+         */
     }
-        
-     /*@brief: Costruttore con parametri*/
 
+    /*@brief: Costruttore con parametri*/
     public Pallina(float posX, float posY, double velX, double velY, int direzioneX, int direzioneY, int Raggio) {
         this.posX = posX;
         this.posY = posY;
@@ -79,10 +69,9 @@ public class Pallina {
         this.velY = velY;
         this.direzioneX = direzioneX;
         this.direzioneY = direzioneY;
-        this.Raggio=Raggio;
-        
+        this.Raggio = Raggio;
+
     }
-    
 
     public int getDirezioneX() {
         return direzioneX;
@@ -107,8 +96,6 @@ public class Pallina {
     public void setRaggio(int Raggio) {
         this.Raggio = Raggio;
     }
-    
-   
 
     public float getPosX() {
         return posX;
@@ -141,58 +128,58 @@ public class Pallina {
     public void setVelY(double velY) {
         this.velY = velY;
     }
-    
-    public void AggiornaInfo(int posX,int posY,int velX,int velY) {
+
+    public void AggiornaInfo(int posX, int posY, int velX, int velY) {
         this.posX = posX;
         this.posY = posY;
         this.velX = velX;
         this.velY = velY;
     }
-    
+
     public void Move() {
-        posX=posX+(float)(velX*direzioneX);
-        posY=posY+(float)(velY*direzioneY);
-        
-        if(posX>=ptrDati.getLungB()-Raggio) {
-            posX=ptrDati.getLungB()-Raggio;
+        posX = posX + (float) (velX * direzioneX);
+        posY = posY + (float) (velY * direzioneY);
+
+        if (posX >= 150 - Raggio) {
+            posX = 150 - Raggio;
         }
         /*if(posY>=HEIGHT_SCREEN-Raggio) {
             posY=HEIGHT_SCREEN-Raggio;              //FUTURO
         }       
-        */
+         */
     }
-    
+
     public void IncrementaVelocitàX() {
-        velX+=0.2*ptrDati.getInclinazioneY();
+        velX += 0.2 * ptrDati.getInclinazioneY();
     }
+
     public void IncrementaVelocitàY() {
-        velY+=0.2;
+        velY += 0.2;
     }
+
     public void DecrementaVelocitàX() {
-        velX-=0.2;
-        if(velX<0) {
-            velX=0;
+        velX -= 0.2;
+        if (velX < 0) {
+            velX = 0;
         }
     }
+
     public void DecrementaVelocitàY() {
-        velY-=0.2;
-        if(velY<0) {
-            velY=0;
+        velY -= 0.2;
+        if (velY < 0) {
+            velY = 0;
         }
     }
-    
-    
-    
-    
+
     public String VisualizzaInfo() {
-        return "PosizioneX: "+String.valueOf(posX)+"/PosizioneY:"+String.valueOf(posY)+"/VelocitàX:"+String.valueOf(velX)+"/VelocitàY:"+String.valueOf(velY);
+        return "PosizioneX: " + String.valueOf(posX) + "/PosizioneY:" + String.valueOf(posY) + "/VelocitàX:" + String.valueOf(velX) + "/VelocitàY:" + String.valueOf(velY);
     }
-    
-    
-    
+
     public class TimerTask {
+
         public void run() {
-            
+
         }
+    }
 }
-}
+
