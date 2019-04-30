@@ -162,7 +162,7 @@ public class Pallina {
     public void IncrementaVelocitàX() {
         if(cont==20) {
            velX += 0.02;
-            if(velX<0.2) {
+            if(velX>0.2) {
                 velX=0.2;
             } 
             cont=0;
@@ -201,8 +201,4 @@ public class Pallina {
 
         }
     }
-    
 }
-
-
-
