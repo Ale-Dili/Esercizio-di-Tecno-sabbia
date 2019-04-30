@@ -44,7 +44,7 @@ public class Sensore {
         AddValue.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                slider.setValue((int) (datiC.getValue() + 1));
+                slider.setValue((int) (datiC.getInclinazioneY() + 1));
             }
         });
 
@@ -53,7 +53,7 @@ public class Sensore {
         DecValue.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                slider.setValue((int) (datiC.getValue() - 1));
+                slider.setValue((int) (datiC.getInclinazioneY() - 1));
             }
         });
         
@@ -65,7 +65,6 @@ public class Sensore {
             @Override
             public void stateChanged(ChangeEvent event) {
                 float value = (float) slider.getValue();
-                datiC.setValue((int) value);
                 valore.setText(Integer.toString((int) value));
                 datiC.setInclinazioneY(value);
             }
