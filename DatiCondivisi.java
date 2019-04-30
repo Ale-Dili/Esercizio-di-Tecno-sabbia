@@ -13,38 +13,42 @@ import java.util.ArrayList;
  */
 public class DatiCondivisi {
 
-    private int lungS, altS; //dimensioni schermo
-    private int numRighe, numColonne;
+    private int lungS, altS;   //Attributi che definiscono le dimensioni dello schermo (lunghezza e altezza).
+    private int numRighe, numColonne;   //Attributi che identificano i numeri di righe e colonne che costituiscono la canvas.    
+    private Sensore s;   //Creazione del sensore
+    private Scatole[] array;   //Creazione delle scatole
 
-    
-    private int perSabbia; //percentuale sabbia
-    private Sensore s=new Sensore();
-    private Scatole[] array;
-
-    public DatiCondivisi(int lungS, int altS, int perSabbia) {
+    /**
+     *
+     * Metodo costruttore con parametri
+     *
+     */
+    public DatiCondivisi(int lungS, int altS) {
+        s = new Sensore();
         this.lungS = lungS;
         this.altS = altS;
         this.numColonne=2;
         this.numRighe=1;
-        this.perSabbia = perSabbia;
 
         array = new Scatole[2];
         
     }
     
+    /**
+     *
+     * Metodo costruttore senza parametri
+     *
+     */
     public DatiCondivisi() {
+        s = new Sensore();
         array = new Scatole[2];
-        this.perSabbia = 100;
         this.numColonne=2;
         this.numRighe=1;
     }
 
-
-
     public void setS(Sensore s) {
         this.s = s;
     }
-
 
     public Sensore getS() {
         return s;
@@ -66,7 +70,6 @@ public class DatiCondivisi {
         this.numColonne = numColonne;
     }
 
-
     public float getInclinazioneX() {
         return s.getInclinazioneX();
     }
@@ -82,8 +85,6 @@ public class DatiCondivisi {
         s.setInclinazioneY(inclinazione);
     }
 
-
-
     public int getLungS() {
         return lungS;
     }
@@ -91,7 +92,6 @@ public class DatiCondivisi {
     public int getAltS() {
         return altS;
     }
-
 
     public void setLungS(int lungS) {
         this.lungS = lungS;
@@ -101,16 +101,6 @@ public class DatiCondivisi {
         this.altS = altS;
     }
 
-
-
-    public void setPerSabbia(int perSabbia) {
-        this.perSabbia = perSabbia;
-    }
-
-    public int getPerSabbia() {
-        return perSabbia;
-    }
-
     public Scatole[] getArray() {
         return array;
     }
@@ -118,10 +108,4 @@ public class DatiCondivisi {
     public void setArray(Scatole[] array) {
         this.array = array;
     }
-
-   
-    
-    
-
-
 }
