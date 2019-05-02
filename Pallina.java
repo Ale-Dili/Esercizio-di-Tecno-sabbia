@@ -6,6 +6,7 @@
 package es.sabbia_scatola;
 
 import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  *
@@ -30,14 +31,14 @@ public class Pallina {
 
     private DatiCondivisi ptrDati;
 
-    private int cont=0;  //PROVA
+    private int cont=0;                       
 
     /*@brief: Costruttore senza parametri, posiziono la pallina al centro della scatola e le sue velocità a 0*/
-    public Pallina(DatiCondivisi dati) {
+    public Pallina(DatiCondivisi dati,float posX,float posY) {
         this.ptrDati = dati;
         this.Raggio = 20;
-        this.posX = 150 / 2;          //Cambiare in base a lunghezza della scatola
-        this.posY = 150 / 2;          //Cambiare in base a larghezza della scatola
+        this.posX = posX;          //Cambiare in base a lunghezza della scatola
+        this.posY = posY;          //Cambiare in base a larghezza della scatola
         this.velX = 0;
         this.velY = 0;
         /*Genero un numero random tra 0 e 2 (0,1), poi calcolo il resto della divisione con il numero 2 facendo il modulo(%),
@@ -73,6 +74,25 @@ public class Pallina {
 
     }
 
+    public DatiCondivisi getPtrDati() {
+        return ptrDati;
+    }
+
+    public void setPtrDati(DatiCondivisi ptrDati) {
+        this.ptrDati = ptrDati;
+    }
+
+    public int getCont() {
+        return cont;
+    }
+
+    public void setCont(int cont) {
+        this.cont = cont;
+    }
+
+
+
+    
     public int getDirezioneX() {
         return direzioneX;
     }
@@ -136,21 +156,45 @@ public class Pallina {
         this.velY = velY;
     }
 
-    public void Move() {
-        if (ptrDati.getInclinazioneY() > 10) {
-            posX = posX + (float) ((velX * direzioneX)*(ptrDati.getInclinazioneY()/10));
-            posY = posY + (float) (velY * direzioneY);
-
-            if (posX >= 150 - Raggio) {
-                posX = 150 - Raggio;
+    public void Move(int idBox) {
+        if (velX > 0) {
+            direzioneX=1;
+            
+            //velXIniziale=velX;
+            //timer.schedule(new Compito(), 50);
+            
+            
+            posX = posX + (float) ((velX * direzioneX)*(ptrDati.getInclinazioneY()/10));      //LA POSIZIONE VIENE AGGIORNATA IN BASE ALLA VELOCITA DELLA PALLINA(VelX), DIREZIONE DELLA PALLINA(direzioneX, che può
+            posY = posY + (float) (velY * direzioneY);                                        //essere 1 --> verso destra , oppure -1 --> verso sinistra) E IN BASE ALL'INCLINAZIONE DELLA SCATOLA(in questo modo più 
+                                                                                              //la scatola è inclinata più la pallina si sposterà velocemente, la divisione per 10 viene fatta perchè altrimenti i valori di inclinazione usati sarebbero troppo grandi)
+            if (posX >= 150+((150*idBox) - (Raggio/2))) {               //MODIFICATO
+                
+                if((velX*(ptrDati.getInclinazioneY()/10))>1) {
+                    ptrDati.setSposta(true);
+                }
+                
+                
+                posX = 150+(150*idBox) - (Raggio/2);
+                velX=0;
             }
         }
-        if(ptrDati.getInclinazioneY() < -10) {
-            posX = posX + (float) ((velX * direzioneX)*(ptrDati.getInclinazioneY()));
+        if(velX < 0) {
+            direzioneX=-1;
+            
+            //velXIniziale=velX;
+            //timer.schedule(new Compito(), 50);
+            
+            
+            posX = posX + (float) ((velX * direzioneX)*(ptrDati.getInclinazioneY()/10));        
             posY = posY + (float) (velY * direzioneY);
 
-            if (posX >= 150 - Raggio) {
-                posX = 150 - Raggio;
+            if ((posX <= 0+(150*idBox) + (Raggio/2))) {
+                
+                if((velX*(ptrDati.getInclinazioneY()/10))<-1) {
+                    ptrDati.setSposta(true);
+                }
+                posX = 0+(150*idBox) + (Raggio/2);
+                velX=0;
             }
         }
         /*if(posY>=HEIGHT_SCREEN-Raggio) {
@@ -160,10 +204,10 @@ public class Pallina {
     }
 
     public void IncrementaVelocitàX() {
-        if(cont==20) {
-           velX += 0.02;
+        if(cont==20) {                          //CONTATORE CHE SERVE PER INCREMENTARE LA VELOCITA DELLA PALLINA SOLO 1 VOLTA OGNI 20 RICHIAMI DEL METODO
+           velX += 0.02;                        //IncrementaVelocitàX(), IN QUESTO MODO SI EVITA CHE LA VELOCITA AUMENTI TROPPO VELOCEMENTE
             if(velX>0.2) {
-                velX=0.2;
+                velX=0.2;                       //VELOCITA MASSIMA VERSO DESTRA 0.2 (INCREMENTO DI 0.02 ALLA VOLTA)
             } 
             cont=0;
         }
@@ -178,9 +222,15 @@ public class Pallina {
     }
 
     public void DecrementaVelocitàX() {
-        velX -= 0.2;
-        if (velX < 0) {
-            velX = 0;
+        if(cont==20) {                          //CONTATORE CHE SERVE PER DECREMENTARE LA VELOCITA DELLA PALLINA SOLO 1 VOLTA OGNI 20 RICHIAMI DEL METODO
+           velX -= 0.02;                        //DecrementaVelocitàX(), IN QUESTO MODO SI EVITA CHE LA VELOCITA NON DIMINUISCA TROPPO VELOCEMENTE
+            if(velX<-0.2) {
+                velX=-0.2;                      //VELOCITA MASSIMA VERSO SINISTRA -0.2 (INCREMENTO DI -0.02 ALLA VOLTA)
+            } 
+            cont=0;
+        }
+        else {
+            cont++;
         }
     }
 
@@ -195,10 +245,6 @@ public class Pallina {
         return "PosizioneX: " + String.valueOf(posX) + "/PosizioneY:" + String.valueOf(posY) + "/VelocitàX:" + String.valueOf(velX) + "/VelocitàY:" + String.valueOf(velY);
     }
 
-    private class Compito {
-
-        public void run() {
-
-        }
-    }
+    
 }
+
