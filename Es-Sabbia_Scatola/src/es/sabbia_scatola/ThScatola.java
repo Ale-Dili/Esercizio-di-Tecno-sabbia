@@ -22,7 +22,6 @@ public class ThScatola extends Thread {
     private DatiCondivisi ptrDati;
     private Scatole[] array;
     private int id;
-    private int cont;
 
     public ThScatola(DatiCondivisi ptrDati, int id) {
         this.id = id;
