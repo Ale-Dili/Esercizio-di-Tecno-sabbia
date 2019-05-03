@@ -1,0 +1,188 @@
+@startuml
+
+
+class Pallina {
+
+'@brief: indica la posizione sull'asse delle ascisse della pallina'
+- float posX
+
+'@brief: indica la posizione sull'asse delle ordinate della pallina'
+- float posY
+
+'@brief: indica la velocità sull'asse delle ascisse della pallina'
+- float velX
+
+'@brief: indica la velocità sull'asse delle ordinate della pallina'
+- float velY
+
+'@brief: indica la direzione sull'asse delle ascisse della pallina'
+- int direzioneX
+
+'@brief: indica la direzione sull'asse delle ordinate della pallina'
+- int direzioneY
+
+'@brief: indica il raggio della pallina'
+- int raggio
+
+'@brief: oggetto della classe DatiCondivisi'
+- DatiCondivisi ptrDati
+
+'@brief: contatore usato per gestire la velocita' della pallina'
+- int cont
+
+'@brief: Metodo che aggiorna la posizione e la velocità della pallina'
++ void aggiornaInfo(int velX,int velY)
+
+'@brief: Metodo che permette alla pallina di muoversi'
++ void move(int idBox)
+
+'@brief: Metodo che aumenta la velocita' della pallina sull'asse delle ascisse'
++ void incrementaVelocitaX()
+
+'@brief: Metodo che aumenta la velocita' della pallina sull'asse delle ordinate'
++ void incrementaVelocitaY()
+
+'@brief: Metodo che diminuisce la velocita' della pallina sull'asse delle ascisse'
++ void decremantaVelocitaX()
+
+'@brief: Metodo che diminuisce la velocita' della pallina sull'asse delle oridnate'
++ void decremantaVelocitaY()
+
+'@brief: Metodo che mostra le informazione della pallina (usato per il debug)'
++ void visualizzaInfo()
+}
+
+
+
+class Sabbia {
+
+'@brief: identifica la quantità di sabbia che esce dalla scatola in seguito al movimento'
+- float sabbiaSpostata
+
+'@brief: oggetto della classe DatiCondivisi'
+- DatiCondivisi ptrDati
+
+'@brief: Metodo che muove la sabbia in seguito all'inclinazione'
++ void move()
+}
+
+class Sensore {
+'@brief: Definisce l'inclinazione del sistema sull'asse delle ascisse'
+- float inclinazioneX
+
+'@brief: Definisce l'inclinazione del sistema sull'asse delle ordinate'
+- float inclinazioneY
+
+'@brief: Frame con slider e bottoni'
+- JFrame frame
+
+'@brief: Nel progetto non esiste, nella realta' tutti gli eventi sono nel costruttore'
++ void eventi()
+
+}
+
+
+
+class Scatole {
+
+'@brief: Definisce l'altezza della scatola'
+- int altB
+
+'@brief: Definisce la profondita' della scatola'
+- int profB
+
+'@brief: Definisce la lunghezza della scatola'
+- int lungB
+
+'@brief: Oggetto della classe Sabbia
+- Sabbia sand
+
+'@brief: indica l'inclinazione della scatola nell'asse delle ordinate'
+- int : inclinazione
+
+'@brief: Oggetto della classe Pallina
+- Pallina ball
+
+'@brief: quantita' dei sabbia presente nella scatola
+- float sandQuantity
+
+'@brief: Percentuale di riempimento della scatola espressa in percentuali
+- int perSabbia
+
+'@brief: Identificatore della scatola
+- int id
+
+'@brief: Flag che indica la presenza della pallina o meno nella scatola
+- boolean ballTF
+
+'@brief: oggetto della classe DatiCondivisi'
+- DatiCondivisi ptrDati
+
+'@brief: Quantita' di sabbia che esce dalla scatola in seguito al movimento'
+- float sabbiaPersa
+
+'@brief: Identificatore della scatola in cui la sabbia e la pallina (presenti nella scatola al momento) devono essere spostati
+- int idTarget
+
+'@brief: Metodo usato per proporzione'
++ void valueSand()
+
+'@brief: Metodo usato per proporzione'
++ void valueSandPixel()
+
+}
+
+
+
+class DatiCondivisi {
+'@brief: lunghezza dello schermo
+-int lungS 
+
+'@brief: altezza dello schermo
+-int altS
+
+'@brief: gestisce lo spostamento della pallina
+-boolean sposta
+
+'@brief: Insieme di scatole'
+-Scatole[] array
+
+'@brief: lunghezza della scatola
+-int lungB 
+
+'@brief: altezza della scatola
+-int altB
+
+'@brief: oggetto della classe sensore
+-Sensore s
+
+'@brief: percentuale di sabbia contenuta nella scatola'
+-int perSabbia
+}
+
+class ThScatola{
+'@brief: oggetto della classe DatiCondivisi'
+- DatiCondivisi ptrDati
+
+'@brief: Insieme di scatole'
+-Scatole[] array
+
+'@brief: Identificatore della scatola a cui il thread e' associato'
+-int id
+
+'@brief: Metodo run del thread che raccoglie le informazioni delle altre classi e le organizza per disegnarle'
++ void run()
+}
+
+
+
+Sensore "1" -- "1" DatiCondivisi : FornisceMisurazioni > 
+Sabbia "1" --o "1" Scatole : contenuta > 
+Pallina "1" --o "1" Scatole : contenuta >
+DatiCondivisi "1" -- "1" Scatole : interagisce >
+DatiCondivisi "1" -- "1" ThScatola : gestisceInformazioni <
+
+
+
+
+@enduml
