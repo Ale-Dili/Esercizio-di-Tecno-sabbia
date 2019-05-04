@@ -60,22 +60,15 @@ public class ThScatola extends Thread {
                 }
 
                 if (id == 0) {
-                    if ((array[id].isBallTF()) && (ptrDati.isSposta()) && (array[id].getBall().getPosX() == 150 - (array[id].getBall().getRaggio()/2))) {
-                        
-                        
+                    if ((array[id].isBallTF()) && (ptrDati.isSposta()) && (array[id].getBall().getPosX() == 150 - (array[id].getBall().getRaggio()/2))) {    
                         array[array[id].getIdTarget()].setBall(new Pallina(array[id].getPtrDati(),(array[id].getIdTarget()*150)+(array[id].getBall().getRaggio()/2),75));      //DA MODIFICARE NELLE SUCCESSIVE VERSIONI
-                        
-                        
-                        
-                        
+    
                         array[array[id].getIdTarget()].setBallTF(true);
                         array[id].setBall(null);
                         array[id].setBallTF(false);
                         ptrDati.setSposta(false);
                     }
-
                     if (array[id].getSabbiaPersa() > 0) {
-
                         float newQuantity = array[id].getSandQuantity() - array[id].getSabbiaPersa();
                         if (newQuantity < 0) {
                             newQuantity = 0;
@@ -110,20 +103,13 @@ public class ThScatola extends Thread {
                     if ((array[id].isBallTF()) && (ptrDati.isSposta()) && (array[id].getBall().getPosX() == 150 + (array[id].getBall().getRaggio()/2))) {
                         
                         
-                        array[array[id].getIdTarget()].setBall(new Pallina(array[id].getPtrDati(),(150+(array[id].getIdTarget()*150))-(array[id].getBall().getRaggio()/2),75));
-                        
-                        
+                        array[array[id].getIdTarget()].setBall(new Pallina(array[id].getPtrDati(),(150+(array[id].getIdTarget()*150))-(array[id].getBall().getRaggio()/2),75));                       
                         array[array[id].getIdTarget()].setBallTF(true);
                         array[id].setBall(null);
                         array[id].setBallTF(false);
                         ptrDati.setSposta(false);
                     }
-                    
-                    
-                    
-                    
-                    
-                    
+
                     if (array[id].getSabbiaPersa() > 0) {
 
                         float newQuantity = array[id].getSandQuantity() - array[id].getSabbiaPersa();

@@ -142,7 +142,7 @@ public class Scatole {
     }
 
     public void move() {
-        sand.move();
+        sand.move(id);
         
     }
     public void moveBall(int idBox) {

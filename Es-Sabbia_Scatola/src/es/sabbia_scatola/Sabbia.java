@@ -14,21 +14,36 @@ public class Sabbia {
 
     private float SabbiaSpostata;
     DatiCondivisi ptrDati;
+    Scatole array[];
  
     Sabbia(DatiCondivisi ptrDati) {
         this.SabbiaSpostata = 0;
         this.ptrDati = ptrDati;
+        array = ptrDati.getArray();
     }
 
 //riceve da sensore l'inclinazione tramite get in dati condivisi, in seguito controlla se l'inclinazione é sufficente per lo spostamento della sabbia, poi manda la quantita' di sabbia a thscatola tramite dati condivisi
-    public void move() {
+    public void move(int id) {
         
-        if (ptrDati.getInclinazioneY() > 10) {
+        if (ptrDati.getInclinazioneY() > 10) {            
             SabbiaSpostata = (float) (0.2 * ptrDati.getInclinazioneY());
+            if(SabbiaSpostata < array[id].getSandQuantity()){
+               
+            }
+            else{
+                SabbiaSpostata=0;
+            }
+            
             //System.out.println("prova1 "+ptrDati.getInclinazioneY());             OUTPUT DI PROVA
         }
         if(ptrDati.getInclinazioneY()<-10) {
             SabbiaSpostata = (float) (0.2 * ptrDati.getInclinazioneY()) * -1;
+            if(SabbiaSpostata < array[id].getSandQuantity()){
+               
+            }
+            else{
+                SabbiaSpostata=0;
+            }
             //System.out.println("prova2 "+ptrDati.getInclinazioneY());             OUTPUT DI PROVA
         }
         
