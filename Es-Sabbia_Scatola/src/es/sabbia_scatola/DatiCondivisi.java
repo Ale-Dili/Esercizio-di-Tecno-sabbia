@@ -25,20 +25,20 @@ public class DatiCondivisi {
     public DatiCondivisi(int lungS, int altS, int perSabbia) {
         this.lungS = lungS;
         this.altS = altS;
-        this.numColonne=2;
-        this.numRighe=1;
+        this.numColonne=3;
+        this.numRighe=2;
         this.perSabbia = perSabbia;
 
-        array = new Scatole[2];
+        array = new Scatole[6];
         
     }
     
     
     public DatiCondivisi() {
-        array = new Scatole[2];
+        array = new Scatole[6];
         this.perSabbia = 100;
-        this.numColonne=2;
-        this.numRighe=1;
+        this.numColonne=3;
+        this.numRighe=2;
     }
 
     public boolean isSposta() {
