@@ -27,23 +27,23 @@ public class Sabbia {
         
         if (ptrDati.getInclinazioneY() > 10) {            
             SabbiaSpostata = (float) (0.2 * ptrDati.getInclinazioneY());
-            if(SabbiaSpostata < array[id].getSandQuantity()){
+            /*if(SabbiaSpostata < array[id].getSandQuantity()){
                
             }
             else{
                 SabbiaSpostata=0;
-            }
+            }*/
             
             //System.out.println("prova1 "+ptrDati.getInclinazioneY());             OUTPUT DI PROVA
         }
         if(ptrDati.getInclinazioneY()<-10) {
             SabbiaSpostata = (float) (0.2 * ptrDati.getInclinazioneY()) * -1;
-            if(SabbiaSpostata < array[id].getSandQuantity()){
+            /*if(SabbiaSpostata < array[id].getSandQuantity()){
                
             }
             else{
                 SabbiaSpostata=0;
-            }
+            }*/
             //System.out.println("prova2 "+ptrDati.getInclinazioneY());             OUTPUT DI PROVA
         }
         

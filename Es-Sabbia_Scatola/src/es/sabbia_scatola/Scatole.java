@@ -16,13 +16,15 @@ public class Scatole {
     int id;
     boolean ballTF;
     DatiCondivisi ptrDati;
-    //Pallina ball;
+    
     Sabbia sand;
     Pallina ball;
     float sabbiaPersa;
     int idTarget;
     private int lungB, altB, profB; //dimensioni scatola
-
+    
+    private boolean piena;   //PROVA
+    
     public int getLungB() {
         return lungB;
     }
@@ -63,11 +65,27 @@ public class Scatole {
         this.lungB = lunB;
         this.altB = altB;
         this.profB = profB;
+        
+        if(this.perSabbia==100) {
+            piena=true;
+        }
+        else {
+            piena=false;
+        }
     }
 
     public Scatole(DatiCondivisi ptrDati) {
         this.ptrDati = ptrDati;
     }
+
+    public boolean isPiena() {
+        return piena;
+    }
+
+    public void setPiena(boolean piena) {
+        this.piena = piena;
+    }
+    
 
     public void setSandQuantity(float sandQuantity) {
         this.sandQuantity = sandQuantity;

@@ -22,6 +22,7 @@ public class ThScatola extends Thread {
     private DatiCondivisi ptrDati;
     private Scatole[] array;
     private int id;
+    private float newQuantity;
 
     public ThScatola(DatiCondivisi ptrDati, int id) {
         this.id = id;
@@ -38,10 +39,10 @@ public class ThScatola extends Thread {
         while (true) {
 
             array[id].move();
-            array[id].setSabbiaPersa(array[id].getSabbiaSpostata());
-            array[id].setSabbiaSpostata();
-            if (array[id].ballTF) {                  //AGGIUNTO
-                array[id].moveBall(id);
+            array[id].setSabbiaPersa(array[id].getSabbiaSpostata());        //Sposta il valore di SabbiaSpostata in SabbiaPersa
+            array[id].setSabbiaSpostata();          //Resetta a 0 il valore di SabbiaSpostata
+            if (array[id].ballTF) {                  //Se nella scatola è presente la pallina (ballTF=true)
+                array[id].moveBall(id);             //La pallina viene mossa
             }
             try {
                 Thread.sleep(10);                        //provare 5 millisecondi
@@ -49,92 +50,23 @@ public class ThScatola extends Thread {
                 Logger.getLogger(ThScatola.class.getName()).log(Level.SEVERE, null, ex);
             }
 
-            if (ptrDati.getInclinazioneY() > 0) {
+            if (ptrDati.getInclinazioneY() > 10) {
 
-                if (ptrDati.getInclinazioneY() < 11) {
+                array[id].setIdTarget(id + 1);
 
-                } else {
-                    if (array[id].ballTF) {                              //AGGIUNTO 
-                        array[id].getBall().IncrementaVelocitàX();
-                    }
-                }
+                GestionePallinaVersoDestra();
+                GestioneSabbiaVersoDestra();
 
-                if (id == 0) {
-                    if ((array[id].isBallTF()) && (ptrDati.isSposta()) && (array[id].getBall().getPosX() == 150 - (array[id].getBall().getRaggio()/2))) {    
-                        array[array[id].getIdTarget()].setBall(new Pallina(array[id].getPtrDati(),(array[id].getIdTarget()*150)+(array[id].getBall().getRaggio()/2),75));      //DA MODIFICARE NELLE SUCCESSIVE VERSIONI
-    
-                        array[array[id].getIdTarget()].setBallTF(true);
-                        array[id].setBall(null);
-                        array[id].setBallTF(false);
-                        ptrDati.setSposta(false);
-                    }
-                    if (array[id].getSabbiaPersa() > 0) {
-                        float newQuantity = array[id].getSandQuantity() - array[id].getSabbiaPersa();
-                        if (newQuantity < 0) {
-                            newQuantity = 0;
-                            array[id].setSandQuantity(newQuantity);
-                            array[id].setPerSabbia(0);
-                            array[array[id].getIdTarget()].setPerSabbia(100);
-                            array[array[id].getIdTarget()].setSandQuantity(3375);
-
-                        } else {
-                            array[id].setSandQuantity(newQuantity);
-                            array[id].setPerSabbia((int) (array[id].getSandQuantity() * 100) / 3375);                                         //100 : 3375 = x : sandQuantity
-                            //System.out.println("prova:1 sandQuantity "+array[id].getSandQuantity());      //OUTPUT DI PROVA
-                            array[id].setIdTarget(id + 1);
-                            array[array[id].getIdTarget()].setSandQuantity(array[array[id].getIdTarget()].getSandQuantity() + array[id].getSabbiaPersa());
-                            array[array[id].getIdTarget()].setPerSabbia((int) (array[array[id].getIdTarget()].getSandQuantity() * 100) / 3375);
-
-                        }
-                    }
-                }
             }
-            if (ptrDati.getInclinazioneY() < 0) {
+            if (ptrDati.getInclinazioneY() < -10) {
 
-                if (ptrDati.getInclinazioneY() > -11) {
+                array[id].setIdTarget(id - 1);
 
-                } else {
-                    if (array[id].ballTF) {                          //AGGIUNTO
-                        array[id].getBall().DecrementaVelocitàX();
-                    }
-                }
-
-                if (id == 1) {
-                    if ((array[id].isBallTF()) && (ptrDati.isSposta()) && (array[id].getBall().getPosX() == 150 + (array[id].getBall().getRaggio()/2))) {
-                        
-                        
-                        array[array[id].getIdTarget()].setBall(new Pallina(array[id].getPtrDati(),(150+(array[id].getIdTarget()*150))-(array[id].getBall().getRaggio()/2),75));                       
-                        array[array[id].getIdTarget()].setBallTF(true);
-                        array[id].setBall(null);
-                        array[id].setBallTF(false);
-                        ptrDati.setSposta(false);
-                    }
-
-                    if (array[id].getSabbiaPersa() > 0) {
-
-                        float newQuantity = array[id].getSandQuantity() - array[id].getSabbiaPersa();
-
-                        if ((newQuantity < 0) && (array[id].getIdTarget() != -1)) {
-                            newQuantity = 0;
-                            array[id].setSandQuantity(newQuantity);
-                            array[id].setPerSabbia(0);
-                            array[array[id].getIdTarget()].setPerSabbia(100);
-                            array[array[id].getIdTarget()].setSandQuantity(3375);
-
-                        } else {
-                            array[id].setSandQuantity(newQuantity);
-                            array[id].setPerSabbia((int) (array[id].getSandQuantity() * 100) / 3375);                                         //100 : 3375 = x : sandQuantity
-                            //System.out.println("prova:1 sandQuantity "+array[id].getSandQuantity());      //OUTPUT DI PROVA
-                            array[id].setIdTarget(id - 1);
-                            array[array[id].getIdTarget()].setSandQuantity(array[array[id].getIdTarget()].getSandQuantity() + array[id].getSabbiaPersa());
-                            array[array[id].getIdTarget()].setPerSabbia((int) (array[array[id].getIdTarget()].getSandQuantity() * 100) / 3375);
-
-                        } //
-                    }
-                }
+                GestionePallinaVersoSinistra();
+                GestioneSabbiaVersoSinistra();
 
             } else {
-                //
+
             }
 
             array[id].setSabbiaPersa(0);
@@ -144,66 +76,96 @@ public class ThScatola extends Thread {
 
     }
 
-    /* public int getSabbiaPersa() {
-        return sabbiaPersa;
-    }
-    
-     public void setSabbiaPersa(int sabbiaPersa) {
-        this.sabbiaPersa = sabbiaPersa;
-    }
-     */
-    // public DatiCondivisi(){
-    //}
-    /*  public int getLungS() {
-        return lungS;
+    private void GestionePallinaVersoDestra() {
+        if (array[id].ballTF) {
+            array[id].getBall().IncrementaVelocitàX();      //incremento velocità pallina se presente nella scatola
+        }
+
+        if ((array[id].isBallTF()) && (ptrDati.isSposta()) && (array[id].getBall().getPosX() == 150 - (array[id].getBall().getRaggio() / 2))) {     //se pallina è presente, se ha raggiunto una velocità sufficente e se tocca il bordo
+            array[array[id].getIdTarget()].setBall(new Pallina(array[id].getPtrDati(), (array[id].getIdTarget() * 150) + (array[id].getBall().getRaggio() / 2), 75));      //Creo nuova pallina in scatola successiva
+
+            CambioPallina();        //Resetto ball e ballTF della scatola in esecuzione, resetto l'attributo sposta e indico che la scatola successiva ha la pallina
+        }
     }
 
-    public int getAltS() {
-        return altS;
+    private void GestionePallinaVersoSinistra() {
+        if (array[id].ballTF) {
+            array[id].getBall().DecrementaVelocitàX();      //decremento velocità pallina se presente nella scatola
+        }
+
+        if ((array[id].isBallTF()) && (ptrDati.isSposta()) && (array[id].getBall().getPosX() == 150 + (array[id].getBall().getRaggio() / 2))) {             //se pallina è presente, se ha raggiunto una velocità sufficente e se tocca il bordo
+            if (array[id].getIdTarget() == 0) {
+                array[array[id].getIdTarget()].setBall(new Pallina(array[id].getPtrDati(), (150 + (array[id].getIdTarget() * 150)) - (array[id].getBall().getRaggio() / 2), 75));       //Creo nuova pallina in scatola precedente(se è la scatola con id=0)
+            } else {
+                array[array[id].getIdTarget()].setBall(new Pallina(array[id].getPtrDati(), (array[id].getIdTarget() * 150) + (array[id].getBall().getRaggio() / 2), 75));       //Creo nuova pallina in scatola precedente
+            }
+            CambioPallina();        //Resetto ball e ballTF della scatola in esecuzione, resetto l'attributo sposta e indico che la scatola successiva ha la pallina
+        }
     }
 
-    public int getLungB() {
-        return lungB;
+    private void CambioPallina() {
+        array[array[id].getIdTarget()].setBallTF(true);
+        array[id].setBall(null);
+        array[id].setBallTF(false);
+        ptrDati.setSposta(false);
     }
 
-    public int getAltB() {
-        return altB;
+    private void GestioneSabbiaVersoDestra() {
+        if ((array[id].getSabbiaPersa() > 0) && (array[id].isPiena())) {            //Quando c'è sabbia da spostare e scatola in esecuzione è piena
+
+            newQuantity = array[id].getSandQuantity() - array[id].getSabbiaPersa();     //Calcolo nuova quantità di sabbia
+            if (newQuantity < 0) {
+                CambioSabbia();                         //Se <0 resetto a 0 valori di sabbia della scatola in esecuzione e setto ai valori di default quelli della scatola successiva
+
+            } else {
+                if (((array[id].getIdTarget()) % ptrDati.getNumColonne()) == 0) {           //Se scatola è ultima nella sua riga non aggiorno la sabbia
+
+                } else {
+                    AggiornaSabbia();                   //Aggiorno spostamento della sabbia
+                }
+
+            }
+        }
+
     }
 
-    public void setLungS(int lungS) {
-        this.lungS = lungS;
+    private void GestioneSabbiaVersoSinistra() {
+        if ((array[id].getSabbiaPersa() > 0) && (array[id].isPiena())) {            //Quando c'è sabbia da spostare e scatola in esecuzione è piena
+
+            newQuantity = array[id].getSandQuantity() - array[id].getSabbiaPersa();     //Calcolo nuova quantità di sabbia
+
+            if (array[id].getIdTarget() != -1) {        
+
+                if ((newQuantity < 0)) {                //Se <0 resetto a 0 valori di sabbia della scatola in esecuzione e setto ai valori di default quelli della scatola precedente
+                    CambioSabbia();
+                } else {
+                    if ((id % ptrDati.getNumColonne()) == 0) {      //Se scatola è prima nella sua riga non aggiorno la sabbia
+
+                    } else {
+                         AggiornaSabbia();         //Aggiorno spostamento della sabbia 
+                    }
+                }
+            }
+        }
     }
 
-    public void setAltS(int altS) {
-        this.altS = altS;
+    private void CambioSabbia() {
+        newQuantity = 0;
+        array[id].setSandQuantity(newQuantity);
+        array[id].setPerSabbia(0);
+        array[id].setPiena(false);
+        array[array[id].getIdTarget()].setPerSabbia(100);
+        array[array[id].getIdTarget()].setSandQuantity(3375);
+        array[array[id].getIdTarget()].setPiena(true);
     }
 
-    public void setLungB(int lungB) {
-        this.lungB = lungB;
+    private void AggiornaSabbia() {
+        array[id].setSandQuantity(newQuantity);
+        array[id].setPerSabbia((int) (array[id].getSandQuantity() * 100) / 3375);                                         //100 : 3375 = x : sandQuantity
+        //System.out.println("prova:1 sandQuantity "+array[id].getSandQuantity());      //OUTPUT DI PROVA
+
+        array[array[id].getIdTarget()].setSandQuantity(array[array[id].getIdTarget()].getSandQuantity() + array[id].getSabbiaPersa());
+        array[array[id].getIdTarget()].setPerSabbia((int) (array[array[id].getIdTarget()].getSandQuantity() * 100) / 3375);
     }
 
-    public void setAltB(int altB) {
-        this.altB = altB;
-    }
-
-    public int getPerSabbia() {
-        return perSabbia;
-    }
-
-    public float getInclinazione() {
-        return inclinazione;
-    }
-
-    public void setPerSabbia(int perSabbia) {
-        this.perSabbia = perSabbia;
-    }
-
-    public void setInclinazione(float inclinazione) {
-        this.inclinazione = inclinazione;
-    }
-
-    public int valueSand() {
-        return (255 * perSabbia) / 100;
-
-    }*/
 }
