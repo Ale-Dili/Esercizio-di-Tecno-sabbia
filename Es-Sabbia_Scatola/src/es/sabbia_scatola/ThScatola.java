@@ -80,11 +80,12 @@ public class ThScatola extends Thread {
         if (array[id].ballTF) {
             array[id].getBall().IncrementaVelocitàX();      //incremento velocità pallina se presente nella scatola
         }
+        if ((array[id].getIdTarget() % ptrDati.getNumColonne()) != 0) {
+            if ((array[id].isBallTF()) && (ptrDati.isSposta()) && (array[id].getBall().getPosX() == (150 + (150 * id)) - (array[id].getBall().getRaggio() / 2))) {     //se pallina è presente, se ha raggiunto una velocità sufficente e se tocca il bordo
+                array[array[id].getIdTarget()].setBall(new Pallina(array[id].getPtrDati(), (array[id].getIdTarget() * 150) + (array[id].getBall().getRaggio() / 2), 75));      //Creo nuova pallina in scatola successiva
 
-        if ((array[id].isBallTF()) && (ptrDati.isSposta()) && (array[id].getBall().getPosX() == 150 - (array[id].getBall().getRaggio() / 2))) {     //se pallina è presente, se ha raggiunto una velocità sufficente e se tocca il bordo
-            array[array[id].getIdTarget()].setBall(new Pallina(array[id].getPtrDati(), (array[id].getIdTarget() * 150) + (array[id].getBall().getRaggio() / 2), 75));      //Creo nuova pallina in scatola successiva
-
-            CambioPallina();        //Resetto ball e ballTF della scatola in esecuzione, resetto l'attributo sposta e indico che la scatola successiva ha la pallina
+                CambioPallina();        //Resetto ball e ballTF della scatola in esecuzione, resetto l'attributo sposta e indico che la scatola successiva ha la pallina
+            }
         }
     }
 
@@ -93,13 +94,15 @@ public class ThScatola extends Thread {
             array[id].getBall().DecrementaVelocitàX();      //decremento velocità pallina se presente nella scatola
         }
 
-        if ((array[id].isBallTF()) && (ptrDati.isSposta()) && (array[id].getBall().getPosX() == 150 + (array[id].getBall().getRaggio() / 2))) {             //se pallina è presente, se ha raggiunto una velocità sufficente e se tocca il bordo
-            if (array[id].getIdTarget() == 0) {
-                array[array[id].getIdTarget()].setBall(new Pallina(array[id].getPtrDati(), (150 + (array[id].getIdTarget() * 150)) - (array[id].getBall().getRaggio() / 2), 75));       //Creo nuova pallina in scatola precedente(se è la scatola con id=0)
-            } else {
-                array[array[id].getIdTarget()].setBall(new Pallina(array[id].getPtrDati(), (array[id].getIdTarget() * 150) + (array[id].getBall().getRaggio() / 2), 75));       //Creo nuova pallina in scatola precedente
+        if ((id % ptrDati.getNumColonne()) != 0) {
+            if ((array[id].isBallTF()) && (ptrDati.isSposta()) && (array[id].getBall().getPosX() == (150*id) + (array[id].getBall().getRaggio() / 2))) {             //se pallina è presente, se ha raggiunto una velocità sufficente e se tocca il bordo
+                if (array[id].getIdTarget() == 0) {
+                    array[array[id].getIdTarget()].setBall(new Pallina(array[id].getPtrDati(), (150 + (array[id].getIdTarget() * 150)) - (array[id].getBall().getRaggio() / 2), 75));       //Creo nuova pallina in scatola precedente(se è la scatola con id=0)
+                } else {
+                    array[array[id].getIdTarget()].setBall(new Pallina(array[id].getPtrDati(), (id * 150) - (array[id].getBall().getRaggio() / 2), 75));       //Creo nuova pallina in scatola precedente
+                }
+                CambioPallina();        //Resetto ball e ballTF della scatola in esecuzione, resetto l'attributo sposta e indico che la scatola successiva ha la pallina
             }
-            CambioPallina();        //Resetto ball e ballTF della scatola in esecuzione, resetto l'attributo sposta e indico che la scatola successiva ha la pallina
         }
     }
 
@@ -111,38 +114,71 @@ public class ThScatola extends Thread {
     }
 
     private void GestioneSabbiaVersoDestra() {
-        if ((array[id].getSabbiaPersa() > 0) && (array[id].isPiena())) {            //Quando c'è sabbia da spostare e scatola in esecuzione è piena
+        try {                                                           //Faccio un try
+            if (((array[id].getSabbiaPersa() > 0) && (array[id].isPiena()) && (array[id - 1].getSandQuantity() == 0)) || ((array[id].getSabbiaPersa() > 0) && (array[id].getSandQuantity() != 0) && (array[array[id].getIdTarget()].isPiena()))) {            //Quando c'è sabbia da spostare e scatola in esecuzione è piena
 
-            newQuantity = array[id].getSandQuantity() - array[id].getSabbiaPersa();     //Calcolo nuova quantità di sabbia
-            if (newQuantity < 0) {
-                CambioSabbia();                         //Se <0 resetto a 0 valori di sabbia della scatola in esecuzione e setto ai valori di default quelli della scatola successiva
-
-            } else {
-                if (((array[id].getIdTarget()) % ptrDati.getNumColonne()) == 0) {           //Se scatola è ultima nella sua riga non aggiorno la sabbia
+                newQuantity = array[id].getSandQuantity() - array[id].getSabbiaPersa();     //Calcolo nuova quantità di sabbia
+                if (newQuantity < 0) {
+                    CambioSabbia();                         //Se <0 resetto a 0 valori di sabbia della scatola in esecuzione e setto ai valori di default quelli della scatola successiva
 
                 } else {
-                    AggiornaSabbia();                   //Aggiorno spostamento della sabbia
-                }
+                    if ((array[id].getIdTarget() % ptrDati.getNumColonne()) == 0) {           //Se scatola è ultima nella sua riga non aggiorno la sabbia
 
+                    } else {
+                        AggiornaSabbia();                   //Aggiorno spostamento della sabbia
+                    }
+
+                }
+            }
+        } catch (ArrayIndexOutOfBoundsException ex) {                    //Nel caso si generi un'eccezione(in --> array[id - 1].getSandQuantity() == 0) di tipo ArrayIndexOutOfBounds si tratta della scatola con id pari a 0 
+            //e dato che questo errore si genererà solo quando la prima scatola è piena di sabbia non c'è bisogno di tutte le altre condizioni
+            if ((array[id].getSabbiaPersa() > 0) && (array[id].isPiena())) {
+                newQuantity = array[id].getSandQuantity() - array[id].getSabbiaPersa();     //Calcolo nuova quantità di sabbia
+                if (newQuantity < 0) {
+                    CambioSabbia();                         //Se <0 resetto a 0 valori di sabbia della scatola in esecuzione e setto ai valori di default quelli della scatola successiva
+
+                } else {
+                    if (((array[id].getIdTarget()) % ptrDati.getNumColonne()) == 0) {           //Se scatola è ultima nella sua riga non aggiorno la sabbia
+
+                    } else {
+                        AggiornaSabbia();                   //Aggiorno spostamento della sabbia
+                    }
+                }
             }
         }
 
     }
 
     private void GestioneSabbiaVersoSinistra() {
-        if ((array[id].getSabbiaPersa() > 0) && (array[id].isPiena())) {            //Quando c'è sabbia da spostare e scatola in esecuzione è piena
+        if (array[id].getIdTarget() != -1) {
+            try {
+                if (((array[id].getSabbiaPersa() > 0) && (array[id].isPiena()) && (array[id + 1].getSandQuantity() == 0)) || ((array[id].getSabbiaPersa() > 0) && array[array[id].getIdTarget()].isPiena() && (array[id].getSandQuantity() != 0))) {            //Quando c'è sabbia da spostare e scatola in esecuzione è piena
 
-            newQuantity = array[id].getSandQuantity() - array[id].getSabbiaPersa();     //Calcolo nuova quantità di sabbia
+                    newQuantity = array[id].getSandQuantity() - array[id].getSabbiaPersa();     //Calcolo nuova quantità di sabbia
 
-            if (array[id].getIdTarget() != -1) {        
+                    if ((newQuantity < 0)) {                //Se <0 resetto a 0 valori di sabbia della scatola in esecuzione e setto ai valori di default quelli della scatola precedente
+                        CambioSabbia();
+                    } else {
+                        if ((id % ptrDati.getNumColonne()) == 0) {      //Se scatola è prima nella sua riga non aggiorno la sabbia
 
-                if ((newQuantity < 0)) {                //Se <0 resetto a 0 valori di sabbia della scatola in esecuzione e setto ai valori di default quelli della scatola precedente
-                    CambioSabbia();
-                } else {
-                    if ((id % ptrDati.getNumColonne()) == 0) {      //Se scatola è prima nella sua riga non aggiorno la sabbia
+                        } else {
+                            AggiornaSabbia();         //Aggiorno spostamento della sabbia 
+                        }
+                    }
+                }
+            } catch (ArrayIndexOutOfBoundsException ex) {                    //Nel caso si generi un'eccezione(in --> array[id + 1].getSandQuantity() == 0) di tipo ArrayIndexOutOfBounds si tratta dell'ultima scatola(Quella con id più alto) 
+                //e dato che questo errore si genererà solo quando l'ultima scatola è piena di sabbia non c'è bisogno di tutte le altre condizioni
+                if ((array[id].getSabbiaPersa() > 0) && (array[id].isPiena())) {
+                    newQuantity = array[id].getSandQuantity() - array[id].getSabbiaPersa();     //Calcolo nuova quantità di sabbia
+                    if (newQuantity < 0) {
+                        CambioSabbia();                         //Se <0 resetto a 0 valori di sabbia della scatola in esecuzione e setto ai valori di default quelli della scatola successiva
 
                     } else {
-                         AggiornaSabbia();         //Aggiorno spostamento della sabbia 
+                        if (((array[id].getIdTarget()) % ptrDati.getNumColonne()) == 0) {           //Se scatola è ultima nella sua riga non aggiorno la sabbia
+
+                        } else {
+                            AggiornaSabbia();                   //Aggiorno spostamento della sabbia
+                        }
                     }
                 }
             }

@@ -20,6 +20,7 @@ import javax.swing.JPanel;
 import javax.swing.JSlider;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
+
 public class Sensore {
 
     private JFrame frame;
@@ -33,7 +34,9 @@ public class Sensore {
 
     /**
      *
-     * Metodo costruttore con parametri che si occupa di creare i componenti del frame, definendone tutte le caratteristiche fisiche e gli eventi da loro eseguiti.
+     * Metodo costruttore con parametri che si occupa di creare i componenti del
+     * frame, definendone tutte le caratteristiche fisiche e gli eventi da loro
+     * eseguiti.
      *
      */
     public Sensore(DatiCondivisi datiC) {
@@ -42,17 +45,19 @@ public class Sensore {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
         int x = (int) ((dimension.getWidth() - frame.getWidth()) / 2);
-        int y = (int) ((dimension.getHeight() - frame.getHeight())/1.5 );
+        int y = (int) ((dimension.getHeight() - frame.getHeight()) / 1.5);
         frame.setLocation(x, y);
         // creazione di panel all'interno del quale vengono aggiunti i pulsanti.
         JPanel controls = new JPanel();
         JSlider slider = new JSlider();
         JLabel valore = new JLabel();
         valore.setText("0");
-        
+
         /**
          *
-         * Creazione del bottone "Aumenta" che quando viene premuto incrementa di 1 il valore dell'inclinazione sull'asse delle y e setta con il nuovo valore lo slider.
+         * Creazione del bottone "Aumenta" che quando viene premuto incrementa
+         * di 1 il valore dell'inclinazione sull'asse delle y e setta con il
+         * nuovo valore lo slider.
          *
          */
         JButton AddValue = new JButton("Aumenta");
@@ -65,7 +70,9 @@ public class Sensore {
 
         /**
          *
-         * Creazione del bottone "Decrementa" che quando viene premuto decrementa di 1 il valore dell'inclinazione sull'asse delle y e setta con il nuovo valore lo slider.
+         * Creazione del bottone "Decrementa" che quando viene premuto
+         * decrementa di 1 il valore dell'inclinazione sull'asse delle y e setta
+         * con il nuovo valore lo slider.
          *
          */
         JButton DecValue = new JButton("Decrementa");

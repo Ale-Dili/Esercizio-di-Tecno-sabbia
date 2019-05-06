@@ -174,12 +174,10 @@ public class Pallina {
             velX = 0;
         }
 
-        //posX = posX + (float) ((velX * direzioneX) * (ptrDati.getInclinazioneY() / 10));
-        //posY = posY + (float) (velY * direzioneY);
 
         if ((posX <= 0 + (150 * idBox) + (Raggio / 2))) {
 
-            if ((velX * (ptrDati.getInclinazioneY() / 10)) < -1) {
+            if (((velX * (ptrDati.getInclinazioneY() / 10))* -1) < -1) {
                 ptrDati.setSposta(true);
             }
             posX = 0 + (150 * idBox) + (Raggio / 2);
