@@ -37,6 +37,9 @@ public class Sabbia {
      *
      * Metodo che inizializza gli attributi ptrDati, array ed imposta a zero la
      * Attributo SabbiaSpostata
+     *
+     * @param ptrDati parametro che serve per richiamare i metodi della classe
+     * DatiCondivisi.
      */
     Sabbia(DatiCondivisi ptrDati) {
         this.sabbiaSpostata = 0;
@@ -93,6 +96,7 @@ public class Sabbia {
     public float getSabbiaSpostata() {
         return sabbiaSpostata;
     }
+
     /**
      * @author Christian Sipione
      *
