@@ -14,14 +14,38 @@ import processing.core.*;
  * @author scuola
  */
 public class EsSabbia_Scatola extends PApplet {
-
+    /**
+     * @author Edoardo Ballabio
+     *
+     * @brief Oggetto di tipo DatiCondivisi che serve per richiamare i metodi
+     * della classe DatiCondivisi.
+     */
     static DatiCondivisi ptrDati;
+    /**
+     * @author Edoardo Ballabio
+     *
+     * @brief Oggetto di tipo Sensore che serve per richiamare i metodi
+     * della classe Sensore.
+     */
     static Sensore s;
-
-    static ThScatola thBoxes[];         //NUOVO
+    /**
+     * @author Edoardo Ballabio
+     *
+     * @brief Attributo che rappresenta un insieme di thread ThScatola.
+     */
+    static ThScatola thBoxes[];  
+    /**
+     * @author Edoardo Ballabio
+     *
+     * @brief Attributo che rappresenta un insieme di scatole.
+     */
     static Scatole[] array;
 
     /**
+     * @author Edoardo Ballabio
+     * 
+     * @brief Metodo che inizializza i vari attributi della classe e crea una nuova canvas per il disegno dei vari elementi
+     * 
      * @param args the command line arguments
      */
     public static void main(String[] args) {
@@ -45,35 +69,51 @@ public class EsSabbia_Scatola extends PApplet {
 
         }
 
-        for (int i = 0; i < thBoxes.length; i++) {                 //NUOVO
-            thBoxes[i] = new ThScatola(ptrDati, i);           //NUOVO
-        }                                                   //NUOVO
+        for (int i = 0; i < thBoxes.length; i++) {               
+            thBoxes[i] = new ThScatola(ptrDati, i);         
+        }                                                   
 
         PApplet.main(new String[]{"es.sabbia_scatola.EsSabbia_Scatola"});
 
     }
 
+    /**
+     * @author Edoardo Ballabio
+     *
+     * @brief Metodo che inizializza le dimensioni della canvas e fa partire i vari thread ThScatola.
+     */
     public void settings() {
         size(ptrDati.getLungS(), ptrDati.getAltS());
 
-        for (int i = 0; i < array.length; i++) {       //NUOVO
-            thBoxes[i].start();                 //NUOVO
-        }                                       //NUOVO
-
+        for (int i = 0; i < array.length; i++) {       
+            thBoxes[i].start();                 
+        }                                       
     }
 
+    /**
+     * @author Edoardo Ballabio
+     *
+     * @brief Metodo che inizializza la canvas.
+     */
     public void setup() {
         noStroke();
         frameRate(60);
     }
 
+    /**
+     * @author Edoardo Ballabio
+     *
+     * @brief Metodo che si occupa di disegnare la canvas e i suoi elementi.
+     * 
+     * In questo metodo viene colorato lo sfondo della canvas e vengono disegnate le varie scatole che la compongono.
+     * Inoltre viene disegnata anche la pallina.
+     */
     public void draw() {
         background(119, 136, 153);
         for (int i = 0; i < (int) (ptrDati.getAltS() / 150); i++) {          // i --> sono righe (coordinata Y)
             for (int ii = 0; ii < (int) (ptrDati.getLungS() / 150); ii++) {  // ii --> sono colonne (coordinata X)
                 int id = ii + (ptrDati.getNumColonne() * i);      // id = colonnaCorrente+(numeroDelleColonne * rigaCorrente)
                 drawBoxPixel(id, ii * 150, i * 150);
-                //drawBox(id, ii * 150, i * 150);
                 if (array[id].ballTF) {
                     drawBall(id);
                 }
@@ -82,6 +122,13 @@ public class EsSabbia_Scatola extends PApplet {
 
     }
 
+    /**
+     * @author Edoardo Ballabio
+     *
+     * @brief Metodo che si occupa di disegnare lo spostamento graduale della sabbia.
+     * 
+     * In questo metodo in base all'inclinazione della scatola vengono disegnate delle colonne di pixel che rappresentano la sabbia.
+     */
     public void drawBoxPixel(int id, int colonnaPosX, int rigaPosY) {
         stroke(0, 0, 0);
 
@@ -110,6 +157,13 @@ public class EsSabbia_Scatola extends PApplet {
         noFill();
     }
 
+    /**
+     * @author Edoardo Ballabio
+     *
+     * @brief Metodo che si occupa di disegnare la pallina.
+     * 
+     * In questo metodo la pallina viene disegnata in base al suo raggio e alla posizione.
+     */
     public void drawBall(int id) {
         fill(color(255, 0, 0));
         stroke(0, 0, 0);
@@ -117,3 +171,4 @@ public class EsSabbia_Scatola extends PApplet {
         noFill();
     }
 }
+
