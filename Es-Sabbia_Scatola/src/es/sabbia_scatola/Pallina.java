@@ -154,6 +154,7 @@ public class Pallina {
      * @author Edoardo Ballabio
      *
      * @brief Metodo set che imposta il valore della variabile cont.
+     * 
      */
     public void setCont(int cont) {
         this.cont = cont;
@@ -174,6 +175,8 @@ public class Pallina {
      * @author Edoardo Ballabio
      *
      * @brief Metodo set che imposta il valore della direzione della pallina sull'asse delle x.
+     * 
+     * @param direzioneX Parametro che indica la direzione della pallina sull'asse delle x.
      */
     public void setDirezioneX(int direzioneX) {
         this.direzioneX = direzioneX;
@@ -194,6 +197,8 @@ public class Pallina {
      * @author Edoardo Ballabio
      *
      * @brief Metodo set che imposta il valore della direzione della pallina sull'asse delle y.
+     * 
+     * @param direzioneY Parametro che indica la direzione della pallina sull'asse delle y.
      */
     public void setDirezioneY(int direzioneY) {
         this.direzioneY = direzioneY;
@@ -214,6 +219,8 @@ public class Pallina {
      * @author Edoardo Ballabio
      *
      * @brief Metodo set che imposta il valore del raggio della pallina.
+     * 
+     * @param Raggio Parametro che indica il raggio di grandezza della pallina.
      */
     public void setRaggio(int Raggio) {
         this.Raggio = Raggio;
@@ -234,6 +241,8 @@ public class Pallina {
      * @author Edoardo Ballabio
      *
      * @brief Metodo set che imposta il valore della posizione della pallina sull'asse delle x.
+     * 
+     * @param posX Parametro che indica la posizione della pallina sull'asse delle x.
      */
     public void setPosX(float posX) {
         this.posX = posX;
@@ -254,6 +263,8 @@ public class Pallina {
      * @author Edoardo Ballabio
      *
      * @brief Metodo set che imposta il valore della posizione della pallina sull'asse delle y.
+     * 
+     * @param posY Parametro che indica la posizione della pallina sull'asse delle y.
      */
     public void setPosY(float posY) {
         this.posY = posY;
@@ -264,7 +275,7 @@ public class Pallina {
      *
      * @brief Metodo get che fa ritornare il valore della velocità della pallina sull'asse delle x.
      * 
-     * @return velX attributo che rappresenta la velocità della pallina sull'asse delle y.
+     * @return velX attributo che rappresenta la velocità della pallina sull'asse delle x.
      */
     public double getVelX() {
         return velX;
@@ -274,6 +285,8 @@ public class Pallina {
      * @author Edoardo Ballabio
      *
      * @brief Metodo set che imposta il valore della velocità della pallina sull'asse delle x.
+     * 
+     * @param velX Parametro che indica la velocità della pallina sull'asse delle x.
      */
     public void setVelX(double velX) {
         this.velX = velX;
@@ -294,6 +307,8 @@ public class Pallina {
      * @author Edoardo Ballabio
      *
      * @brief Metodo set che imposta il valore della velocità della pallina sull'asse delle y.
+     * 
+     * @param velY Parametro che indica la velocità della pallina sull'asse delle y.
      */
     public void setVelY(double velY) {
         this.velY = velY;
@@ -308,6 +323,8 @@ public class Pallina {
      * Inoltre la posizione della pallina viene aggiornata in base alla velocitò di quest'ultima.
      * Più la scatola è inclinata più la pallina si sposterà velocemente.
      * Quando la pallina tocca il bordo della scatola, se ha una velocità sufficiente, passerà nell'altra scatola.
+     * 
+     * @param idBox Parametro che indica il codice identificativo della scatola in cui la pallina si muove.
      */
     public void Move(int idBox) {
         if (ptrDati.getInclinazioneY() > 10) {
