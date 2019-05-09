@@ -116,36 +116,44 @@ public class Sensore {
     }
 
     /**
-     *
+     * @author Edoardo Ballabio
+     * 
      * Metodo set che permette di settare l'inclinazione sull'asse delle x
      *
+     * @param inclinazioneX Parametro che indica l'inclinazione sull'asse delle x.
      */
     public void setInclinazioneX(float inclinazioneX) {
         this.inclinazioneX = inclinazioneX;
     }
 
     /**
-     *
+     * @author Edoardo Ballabio
+     * 
      * Metodo set che permette di settare l'inclinazione sull'asse delle y
      *
+     * @param inclinazioneY Parametro che indica l'inclinazione sull'asse delle y.
      */
     public void setInclinazioneY(float inclinazioneY) {
         this.inclinazioneY = inclinazioneY;
     }
 
     /**
-     *
+     * @author Edoardo Ballabio
+     * 
      * Metodo get che fa ritornare l'inclinazione sull'asse delle x
      *
+     * @return inclinazioneX attributo che indica l'inclinazione sull'asse delle x.
      */
     public float getInclinazioneX() {
         return inclinazioneX;
     }
 
     /**
-     *
+     * @author Edoardo Ballabio
+     * 
      * Metodo get che fa ritornare l'inclinazione sull'asse delle y
      *
+     * @return inclinazioneX attributo che indica l'inclinazione sull'asse delle x.
      */
     public float getInclinazioneY() {
         return inclinazioneY;
