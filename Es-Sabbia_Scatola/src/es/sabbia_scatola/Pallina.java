@@ -123,10 +123,20 @@ public class Pallina {
 
     }
 
+    /**
+     * @author Edoardo Ballabio
+     *
+     * @brief Metodo get che fa ritornare l'oggetto di tipo DatiCondivisi.
+     */
     public DatiCondivisi getPtrDati() {
         return ptrDati;
     }
 
+    /**
+     * @author Edoardo Ballabio
+     *
+     * @brief Metodo set che imposta il valore dell'oggetto di tipo DatiCondivisi.
+     */
     public void setPtrDati(DatiCondivisi ptrDati) {
         this.ptrDati = ptrDati;
     }
@@ -139,7 +149,12 @@ public class Pallina {
     public int getCont() {
         return cont;
     }
-
+    
+    /**
+     * @author Edoardo Ballabio
+     *
+     * @brief Metodo set che imposta il valore della variabile cont.
+     */
     public void setCont(int cont) {
         this.cont = cont;
     }
@@ -148,11 +163,18 @@ public class Pallina {
      * @author Edoardo Ballabio
      *
      * @brief Metodo get che fa ritornare il valore della direzione della pallina sull'asse delle x.
+     * 
+     * @return direzioneX attributo che rappresenta la direzione della pallina sull'asse delle x.
      */
     public int getDirezioneX() {
         return direzioneX;
     }
 
+    /**
+     * @author Edoardo Ballabio
+     *
+     * @brief Metodo set che imposta il valore della direzione della pallina sull'asse delle x.
+     */
     public void setDirezioneX(int direzioneX) {
         this.direzioneX = direzioneX;
     }
@@ -161,6 +183,8 @@ public class Pallina {
      * @author Edoardo Ballabio
      *
      * @brief Metodo get che fa ritornare il valore della direzione della pallina sull'asse delle y.
+     * 
+     * @return direzioneY attributo che rappresenta la direzione della pallina sull'asse delle y.
      */
     public int getDirezioneY() {
         return direzioneY;
@@ -179,6 +203,8 @@ public class Pallina {
      * @author Edoardo Ballabio
      *
      * @brief Metodo get che fa ritornare il valore del raggio della pallina.
+     * 
+     * @return Raggio attributo che rappresenta il raggio di grandezza della pallina.
      */
     public int getRaggio() {
         return Raggio;
@@ -197,6 +223,8 @@ public class Pallina {
      * @author Edoardo Ballabio
      *
      * @brief Metodo get che fa ritornare il valore della posizione della pallina sull'asse delle x.
+     * 
+     * @return posX attributo che rappresenta la posizione della pallina sull'asse delle x.
      */
     public float getPosX() {
         return posX;
@@ -215,6 +243,8 @@ public class Pallina {
      * @author Edoardo Ballabio
      *
      * @brief Metodo get che fa ritornare il valore della posizione della pallina sull'asse delle y.
+     * 
+     * @return posY attributo che rappresenta la posizione della pallina sull'asse delle x.
      */
     public float getPosY() {
         return posY;
@@ -233,6 +263,8 @@ public class Pallina {
      * @author Edoardo Ballabio
      *
      * @brief Metodo get che fa ritornare il valore della velocità della pallina sull'asse delle x.
+     * 
+     * @return velX attributo che rappresenta la velocità della pallina sull'asse delle y.
      */
     public double getVelX() {
         return velX;
@@ -251,6 +283,8 @@ public class Pallina {
      * @author Edoardo Ballabio
      *
      * @brief Metodo get che fa ritornare il valore della velocità della pallina sull'asse delle y.
+     * 
+     * @return velY attributo che rappresenta la velocità della pallina sull'asse delle x.
      */
     public double getVelY() {
         return velY;
@@ -270,7 +304,10 @@ public class Pallina {
      *
      * @brief Metodo che si occupa di muovere la pallina.
      * 
-     * 
+     * In questo metodo in base all'inclinazione viene cambiata la direzione della pallina.
+     * Inoltre la posizione della pallina viene aggiornata in base alla velocitò di quest'ultima.
+     * Più la scatola è inclinata più la pallina si sposterà velocemente.
+     * Quando la pallina tocca il bordo della scatola, se ha una velocità sufficiente, passerà nell'altra scatola.
      */
     public void Move(int idBox) {
         if (ptrDati.getInclinazioneY() > 10) {
@@ -280,10 +317,9 @@ public class Pallina {
             direzioneX = -1;
         }
 
-        posX = posX + (float) ((velX * direzioneX) * (ptrDati.getInclinazioneY() / 10));      //LA POSIZIONE VIENE AGGIORNATA IN BASE ALLA VELOCITA DELLA PALLINA(VelX), DIREZIONE DELLA PALLINA(direzioneX, che può
-        posY = posY + (float) (velY * direzioneY);                                        //essere 1 --> verso destra , oppure -1 --> verso sinistra) E IN BASE ALL'INCLINAZIONE DELLA SCATOLA(in questo modo più 
-        //la scatola è inclinata più la pallina si sposterà velocemente, la divisione per 10 viene fatta perchè altrimenti i valori di inclinazione usati sarebbero troppo grandi)
-        if (posX >= 150 + ((150 * idBox) - (Raggio / 2))) {               //MODIFICATO
+        posX = posX + (float) ((velX * direzioneX) * (ptrDati.getInclinazioneY() / 10));      
+        posY = posY + (float) (velY * direzioneY);                                        
+        if (posX >= 150 + ((150 * idBox) - (Raggio / 2))) {             
 
             if ((velX * (ptrDati.getInclinazioneY() / 10)) > 1) {
                 ptrDati.setSposta(true);
