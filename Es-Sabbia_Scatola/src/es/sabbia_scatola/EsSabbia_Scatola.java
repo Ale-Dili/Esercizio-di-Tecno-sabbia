@@ -41,6 +41,7 @@ public class EsSabbia_Scatola extends PApplet {
      */
     static Scatole[] array;
 
+    static ThPallina ball;
     /**
      * @author Edoardo Ballabio
      * 
@@ -52,7 +53,7 @@ public class EsSabbia_Scatola extends PApplet {
 
         ptrDati = new DatiCondivisi();
         array = ptrDati.getArray();
-
+        
         thBoxes = new ThScatola[ptrDati.getNumRighe() * ptrDati.getNumColonne()];           //NUOVO
 
         ptrDati.setLungS(ptrDati.getNumColonne() * 150 + 1);            //il +1 è unicamente per vedere lo stroke (il bordo) delle scatole
@@ -68,11 +69,12 @@ public class EsSabbia_Scatola extends PApplet {
             }
 
         }
+        ball=new ThPallina(ptrDati);
 
         for (int i = 0; i < thBoxes.length; i++) {               
             thBoxes[i] = new ThScatola(ptrDati, i);         
         }                                                   
-
+        ball.start();
         PApplet.main(new String[]{"es.sabbia_scatola.EsSabbia_Scatola"});
 
     }

@@ -70,6 +70,8 @@ public class Pallina {
      * della classe DatiCondivisi.
      */
     private DatiCondivisi ptrDati;
+    
+    private Scatole ptrScatola;
 
     private int cont = 0;
 

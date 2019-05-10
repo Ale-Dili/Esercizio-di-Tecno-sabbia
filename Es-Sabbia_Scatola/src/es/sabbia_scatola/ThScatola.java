@@ -80,9 +80,7 @@ public class ThScatola extends Thread {
             array[id].move();
             array[id].setSabbiaPersa(array[id].getSabbiaSpostata());        //Sposta il valore di SabbiaSpostata in SabbiaPersa
             array[id].setSabbiaSpostata();          //Resetta a 0 il valore di SabbiaSpostata
-            if (array[id].ballTF) {                  //Se nella scatola è presente la pallina (ballTF=true)
-                array[id].moveBall(id);             //La pallina viene mossa
-            }
+            
             try {
                 Thread.sleep(10);                        //provare 5 millisecondi
             } catch (InterruptedException ex) {
@@ -93,7 +91,7 @@ public class ThScatola extends Thread {
 
                 array[id].setIdTarget(id + 1);
 
-                GestionePallinaVersoDestra();
+                
                 GestioneSabbiaVersoDestra();
 
             }
@@ -101,7 +99,6 @@ public class ThScatola extends Thread {
 
                 array[id].setIdTarget(id - 1);
 
-                GestionePallinaVersoSinistra();
                 GestioneSabbiaVersoSinistra();
 
             } else {
@@ -125,18 +122,7 @@ public class ThScatola extends Thread {
      * tocca il brodo ad una velocitá sufficiente avviene lo spostamento
      * nell'altra scatola.
      */
-    private void GestionePallinaVersoDestra() {
-        if (array[id].ballTF) {
-            array[id].getBall().IncrementaVelocitàX();      //incremento velocità pallina se presente nella scatola
-        }
-        if ((array[id].getIdTarget() % ptrDati.getNumColonne()) != 0) {
-            if ((array[id].isBallTF()) && (ptrDati.isSposta()) && (array[id].getBall().getPosX() == (150 + (150 * id)) - (array[id].getBall().getRaggio() / 2))) {     //se pallina è presente, se ha raggiunto una velocità sufficente e se tocca il bordo
-                array[array[id].getIdTarget()].setBall(new Pallina(array[id].getPtrDati(), (array[id].getIdTarget() * 150) + (array[id].getBall().getRaggio() / 2), 75));      //Creo nuova pallina in scatola successiva
-
-                CambioPallina();        //Resetto ball e ballTF della scatola in esecuzione, resetto l'attributo sposta e indico che la scatola successiva ha la pallina
-            }
-        }
-    }
+    
 
     /**
      * @author Christian Sipione
@@ -148,22 +134,7 @@ public class ThScatola extends Thread {
      * tocca il brodo ad una velocitá sufficiente avviene lo spostamento
      * nell'altra scatola.
      */
-    private void GestionePallinaVersoSinistra() {
-        if (array[id].ballTF) {
-            array[id].getBall().DecrementaVelocitàX();      //decremento velocità pallina se presente nella scatola
-        }
-
-        if ((id % ptrDati.getNumColonne()) != 0) {
-            if ((array[id].isBallTF()) && (ptrDati.isSposta()) && (array[id].getBall().getPosX() == (150 * id) + (array[id].getBall().getRaggio() / 2))) {             //se pallina è presente, se ha raggiunto una velocità sufficente e se tocca il bordo
-                if (array[id].getIdTarget() == 0) {
-                    array[array[id].getIdTarget()].setBall(new Pallina(array[id].getPtrDati(), (150 + (array[id].getIdTarget() * 150)) - (array[id].getBall().getRaggio() / 2), 75));       //Creo nuova pallina in scatola precedente(se è la scatola con id=0)
-                } else {
-                    array[array[id].getIdTarget()].setBall(new Pallina(array[id].getPtrDati(), (id * 150) - (array[id].getBall().getRaggio() / 2), 75));       //Creo nuova pallina in scatola precedente
-                }
-                CambioPallina();        //Resetto ball e ballTF della scatola in esecuzione, resetto l'attributo sposta e indico che la scatola successiva ha la pallina
-            }
-        }
-    }
+    
 
     /**
      * @author Christian Sipione
@@ -174,12 +145,7 @@ public class ThScatola extends Thread {
      * alla creazione della stessa.
      *
      */
-    private void CambioPallina() {
-        array[array[id].getIdTarget()].setBallTF(true);
-        array[id].setBall(null);
-        array[id].setBallTF(false);
-        ptrDati.setSposta(false);
-    }
+    
 
     /**
      * @author Christian Sipione
