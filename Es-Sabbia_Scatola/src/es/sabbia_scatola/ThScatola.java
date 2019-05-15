@@ -11,7 +11,7 @@ import processing.core.*;
  * @author Luca Tosetti
  *
  * @brief ThScatola.java: classe ThScatola che si occupa della gestione della
- * sabbia e pallina.
+ * sabbia.
  */
 public class ThScatola extends Thread {
 
@@ -66,13 +66,12 @@ public class ThScatola extends Thread {
     /**
      * @author Christian Sipione
      *
-     * @brief Metodo che si occupa di gestire lo spostamento della sabbia e
-     * pallina.
+     * @brief Metodo che si occupa di gestire lo spostamento della sabbia 
      *
-     * Metodo che gestisce la sabbia e la pallina attraverso i metodi
-     * GestionePallinaVersoDestra(),GestioneSabbiaVersoDestra(),GestionePallinaVersoSinistra()
-     * e GestioneSabbiaVersoSinistra(), inoltre utilizza l'oggetto array tramite
-     * puntatore id per indicare la scatola di riferimento su cui lavorare.
+     * Metodo che gestisce la sabbia attraverso i metodi
+     * GestioneSabbiaVersoDestra(),GestioneSabbiaVersoSinistra() inoltre utilizza
+     * l'oggetto array tramite puntatore id per indicare la scatola di
+     * riferimento su cui lavorare.
      */
     public void run() {
         while (true) {
@@ -80,7 +79,7 @@ public class ThScatola extends Thread {
             array[id].move();
             array[id].setSabbiaPersa(array[id].getSabbiaSpostata());        //Sposta il valore di SabbiaSpostata in SabbiaPersa
             array[id].setSabbiaSpostata();          //Resetta a 0 il valore di SabbiaSpostata
-            
+
             try {
                 Thread.sleep(10);                        //provare 5 millisecondi
             } catch (InterruptedException ex) {
@@ -91,7 +90,6 @@ public class ThScatola extends Thread {
 
                 array[id].setIdTarget(id + 1);
 
-                
                 GestioneSabbiaVersoDestra();
 
             }
@@ -111,41 +109,6 @@ public class ThScatola extends Thread {
         }
 
     }
-
-    /**
-     * @author Christian Sipione
-     *
-     * @brief Metodo che si occupa di gestire lo spostamento della pallina.
-     *
-     * Metodo che prima verifica la presenza della pallina nella scatola, se
-     * presente incrementa la velocitá della pallina, in seguito se la pallina
-     * tocca il brodo ad una velocitá sufficiente avviene lo spostamento
-     * nell'altra scatola.
-     */
-    
-
-    /**
-     * @author Christian Sipione
-     *
-     * @brief Metodo che si occupa di gestire lo spostamento della pallina.
-     *
-     * Metodo che prima verifica la presenza della pallina nella scatola, se
-     * presente decrementa la velocitá della pallina, in seguito se la pallina
-     * tocca il brodo ad una velocitá sufficiente avviene lo spostamento
-     * nell'altra scatola.
-     */
-    
-
-    /**
-     * @author Christian Sipione
-     *
-     * @brief Metodo che si occupa di gestire la creazione della pallina.
-     *
-     * Metodo che notifica la presenza della pallina nella scatola e procede
-     * alla creazione della stessa.
-     *
-     */
-    
 
     /**
      * @author Christian Sipione
