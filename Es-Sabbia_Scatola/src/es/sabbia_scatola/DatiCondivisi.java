@@ -1,6 +1,8 @@
 package es.sabbia_scatola;
 
-import java.util.ArrayList;
+import java.util.concurrent.Semaphore;
+
+
 
 /**
  * @author Christian Sipione
@@ -9,7 +11,7 @@ import java.util.ArrayList;
  * di dati fra classi.
  */
 public class DatiCondivisi {
-
+    private Semaphore eseguiPallina;
     /**
      * @author Christian Sipione
      *
@@ -97,8 +99,18 @@ public class DatiCondivisi {
         this.numColonne = 5;
         this.numRighe = 2;
         array = new Scatole[numColonne * numRighe];
+        eseguiPallina=new Semaphore(0);
     }
-
+    
+    public void waitPallina() throws InterruptedException {
+        eseguiPallina.acquire();
+    }
+    
+    public void signalPallina() {
+        eseguiPallina.release();
+    }
+    
+    
     /**
      * @author Christian Sipione
      *
@@ -106,7 +118,7 @@ public class DatiCondivisi {
      *
      * @return sposta attributo che indica se far avvenire lo spostamento.
      */
-    public boolean isSposta() {
+    public synchronized boolean isSposta() {
         return sposta;
     }
 
@@ -115,7 +127,7 @@ public class DatiCondivisi {
      *
      * @brief Metodo che imposta il valore dell'attributo sposta.
      */
-    public void setSposta(boolean sposta) {
+    public synchronized void setSposta(boolean sposta) {
         this.sposta = sposta;
     }
 
@@ -124,7 +136,7 @@ public class DatiCondivisi {
      *
      * @brief Metodo che imposta il valore dell'oggetto s.
      */
-    public void setS(Sensore s) {
+    public synchronized void setS(Sensore s) {
         this.s = s;
     }
 
@@ -135,7 +147,7 @@ public class DatiCondivisi {
      *
      * @return s oggetto della classe Sensore.
      */
-    public Sensore getS() {
+    public synchronized Sensore getS() {
         return s;
     }
 
@@ -146,7 +158,7 @@ public class DatiCondivisi {
      *
      * @return numRighe rappresenta il numero di righe di scatole.
      */
-    public int getNumRighe() {
+    public synchronized int getNumRighe() {
         return numRighe;
     }
 
@@ -155,7 +167,7 @@ public class DatiCondivisi {
      *
      * @brief Metodo che imposta il valore dell'attributo numRighe.
      */
-    public void setNumRighe(int numRighe) {
+    public synchronized void setNumRighe(int numRighe) {
         this.numRighe = numRighe;
     }
 
@@ -166,7 +178,7 @@ public class DatiCondivisi {
      *
      * @return numRighe rappresenta il numero di righe di scatole.
      */
-    public int getNumColonne() {
+    public synchronized int getNumColonne() {
         return numColonne;
     }
 
@@ -175,7 +187,7 @@ public class DatiCondivisi {
      *
      * @brief Metodo che imposta il valore della Attributo numColonne.
      */
-    public void setNumColonne(int numColonne) {
+    public synchronized void setNumColonne(int numColonne) {
         this.numColonne = numColonne;
     }
 
@@ -186,7 +198,7 @@ public class DatiCondivisi {
      *
      * @return s.getInclinazioneX() rappresenta l'inclinazione sull'asse x.
      */
-    public float getInclinazioneX() {
+    public synchronized float getInclinazioneX() {
         return s.getInclinazioneX();
     }
 
@@ -197,7 +209,7 @@ public class DatiCondivisi {
      *
      * @return s.getInclinazioneX() rappresenta l'inclinazione sull'asse y.
      */
-    public float getInclinazioneY() {
+    public synchronized float getInclinazioneY() {
         return s.getInclinazioneY();
     }
 
@@ -206,7 +218,7 @@ public class DatiCondivisi {
      *
      * @brief Metodo che imposta l'inclinazione sull'asse x.
      */
-    public void setInclinazioneX(float inclinazione) {
+    public synchronized void setInclinazioneX(float inclinazione) {
         s.setInclinazioneX(inclinazione);
     }
 
@@ -215,7 +227,7 @@ public class DatiCondivisi {
      *
      * @brief Metodo che imposta l'inclinazione sull'asse y.
      */
-    public void setInclinazioneY(float inclinazione) {
+    public synchronized void setInclinazioneY(float inclinazione) {
         s.setInclinazioneY(inclinazione);
     }
 
@@ -226,7 +238,7 @@ public class DatiCondivisi {
      *
      * @return lungS rappresenta la lunghezza dello schermo.
      */
-    public int getLungS() {
+    public synchronized int getLungS() {
         return lungS;
     }
 
@@ -237,7 +249,7 @@ public class DatiCondivisi {
      *
      * @return lungS rappresenta l'altezza dello schermo.
      */
-    public int getAltS() {
+    public synchronized int getAltS() {
         return altS;
     }
 
@@ -246,7 +258,7 @@ public class DatiCondivisi {
      *
      * @brief Metodo che imposta la lunghezza dello schermo.
      */
-    public void setLungS(int lungS) {
+    public synchronized void setLungS(int lungS) {
         this.lungS = lungS;
     }
 
@@ -255,7 +267,7 @@ public class DatiCondivisi {
      *
      * @brief Metodo che imposta l'altezza dello schermo.
      */
-    public void setAltS(int altS) {
+    public synchronized void setAltS(int altS) {
         this.altS = altS;
     }
 
@@ -264,7 +276,7 @@ public class DatiCondivisi {
      *
      * @brief Metodo che imposta la percentuale della sabbia.
      */
-    public void setPerSabbia(int perSabbia) {
+    public synchronized void setPerSabbia(int perSabbia) {
         this.perSabbia = perSabbia;
     }
 
@@ -275,7 +287,7 @@ public class DatiCondivisi {
      *
      * @return perSabbia rappresenta la percentuale della sabbia.
      */
-    public int getPerSabbia() {
+    public synchronized int getPerSabbia() {
         return perSabbia;
     }
 
@@ -286,7 +298,7 @@ public class DatiCondivisi {
      *
      * @return array serve per richiamare i metodi della classe Scatole.
      */
-    public Scatole[] getArray() {
+    public synchronized Scatole[] getArray() {
         return array;
     }
    /**
@@ -294,7 +306,7 @@ public class DatiCondivisi {
      *
      * @brief Metodo che imposta l'insieme di scatole.
      */
-    public void setArray(Scatole[] array) {
+    public synchronized void setArray(Scatole[] array) {
         this.array = array;
     }
 

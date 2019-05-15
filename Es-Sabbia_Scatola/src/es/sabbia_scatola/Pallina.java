@@ -5,9 +5,6 @@
  */
 package es.sabbia_scatola;
 
-import java.util.Timer;
-import java.util.TimerTask;
-
 /**
  *
  * @author Luca

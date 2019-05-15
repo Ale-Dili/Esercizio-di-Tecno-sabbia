@@ -16,63 +16,63 @@ public class Scatole {
      * @brief Attributo di tipo float che rappresenta la quantità di
      * sabbia presente in una sola scatola.
      */
-    float sandQuantity;
+    private float sandQuantity;
     /**
      * @author Edoardo Ballabio
      *
      * @brief Attributo di tipo intero che rappresenta la percentuale di
      * sabbia presente in una sola scatola.
      */
-    int perSabbia; 
+    private int perSabbia; 
     /**
      * @author Edoardo Ballabio
      *
      * @brief Attributo di tipo intero che rappresenta il codice identificativo
      * della scatola.
      */
-    int id;
+    private int id;
     /**
      * @author Edoardo Ballabio
      *
      * @brief Attributo di tipo boolean che indica se la pallina è 
      * presente oppure no in quella determinata scatola.
      */
-    boolean ballTF;
+    private boolean ballTF;
     /**
      * @author Edoardo Ballabio
      *
      * @brief Oggetto di tipo DatiCondivisi che serve per richiamare i metodi
      * della classe DatiCondivisi.
      */
-    DatiCondivisi ptrDati;
+    private DatiCondivisi ptrDati;
     /**
      * @author Edoardo Ballabio
      *
      * @brief Oggetto di tipo Sabbia che serve per richiamare i metodi
      * della classe Sabbia.
      */
-    Sabbia sand;
+    private Sabbia sand;
     /**
      * @author Edoardo Ballabio
      *
      * @brief Oggetto di tipo Pallina che serve per richiamare i metodi
      * della classe Pallina.
      */
-    Pallina ball;
+    private Pallina ball;
     /**
      * @author Edoardo Ballabio
      *
      * @brief Attributo di tipo float che indica indica la quantità di 
      * sabbia persa dalla scatola per l'inclinazione.
      */
-    float sabbiaPersa;
+    private float sabbiaPersa;
     /**
      * @author Edoardo Ballabio
      *
      * @brief Attributo di tipo intero che indica a quale scatola va passata
      * la pallina, la sabbia o entrambe.
      */
-    int idTarget;
+    private int idTarget;
     /**
      * @author Edoardo Ballabio
      *

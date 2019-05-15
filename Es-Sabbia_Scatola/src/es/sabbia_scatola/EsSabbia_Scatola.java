@@ -41,7 +41,7 @@ public class EsSabbia_Scatola extends PApplet {
      */
     static Scatole[] array;
 
-    static ThPallina ball;
+    static ThPallina thBall;
     /**
      * @author Edoardo Ballabio
      * 
@@ -69,12 +69,14 @@ public class EsSabbia_Scatola extends PApplet {
             }
 
         }
-        ball=new ThPallina(ptrDati);
+        
 
         for (int i = 0; i < thBoxes.length; i++) {               
             thBoxes[i] = new ThScatola(ptrDati, i);         
-        }                                                   
-        ball.start();
+        }       
+        
+        thBall=new ThPallina(ptrDati);
+        thBall.start();
         PApplet.main(new String[]{"es.sabbia_scatola.EsSabbia_Scatola"});
 
     }
@@ -116,7 +118,14 @@ public class EsSabbia_Scatola extends PApplet {
             for (int ii = 0; ii < (int) (ptrDati.getLungS() / 150); ii++) {  // ii --> sono colonne (coordinata X)
                 int id = ii + (ptrDati.getNumColonne() * i);      // id = colonnaCorrente+(numeroDelleColonne * rigaCorrente)
                 drawBoxPixel(id, ii * 150, i * 150);
-                if (array[id].ballTF) {
+                
+ 
+                if((ptrDati.getInclinazioneY()>10) || (ptrDati.getInclinazioneY()<-10)) {                    
+                    ptrDati.signalPallina();
+                }
+                
+                
+                if (array[id].isBallTF()) {
                     drawBall(id);
                 }
             }

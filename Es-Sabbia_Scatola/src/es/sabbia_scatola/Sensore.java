@@ -90,9 +90,11 @@ public class Sensore {
         slider.addChangeListener(new ChangeListener() {
             @Override
             public void stateChanged(ChangeEvent event) {
+                
                 float value = (float) slider.getValue();
                 valore.setText(Integer.toString((int) value));
                 datiC.setInclinazioneY(value);
+                
             }
         });
         JButton resetB = new JButton("Reset");
