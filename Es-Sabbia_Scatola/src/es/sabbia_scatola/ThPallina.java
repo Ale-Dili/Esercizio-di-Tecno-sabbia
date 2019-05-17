@@ -49,14 +49,15 @@ public class ThPallina extends Thread {
         array = ptrDati.getArray();
         ptrScatola = array[0];
     }
+
     /**
      * @author Christian Sipione
      *
-     * @brief Metodo che si occupa di gestire lo spostamento della spallina 
+     * @brief Metodo che si occupa di gestire lo spostamento della spallina
      *
      * Metodo che gestisce la pallina attraverso i metodi
-     * GestionePallinaVersoDestra(),GestionePallinaVersoSinistra() inoltre utilizza
-     * l'oggetto array tramite puntatore id per indicare la scatola di
+     * GestionePallinaVersoDestra(),GestionePallinaVersoSinistra() inoltre
+     * utilizza l'oggetto array tramite puntatore id per indicare la scatola di
      * riferimento su cui lavorare.
      */
     public void run() {
@@ -118,10 +119,11 @@ public class ThPallina extends Thread {
     /**
      * @author Christian Sipione
      *
-     * @brief Metodo che si occupa di gestire la creazione della pallina.
+     * @brief Metodo che imposta di volta in volta la presenza della pallina
+     * nella scatola.
      *
-     * Metodo che notifica la presenza della pallina nella scatola e procede
-     * alla creazione della stessa.
+     * Metodo che notifica dopo lo spostamento della pallina nella scatola
+     * adiacente la presenza della stessa nella nuova scatola.
      *
      */
     private void CambioPallina() {
