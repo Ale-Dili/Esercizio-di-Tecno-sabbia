@@ -108,7 +108,7 @@ public class ThPallina extends Thread {
             array[ptrScatola.getId()].getBall().IncrementaVelocitàX();      //incremento velocità pallina se presente nella scatola
         }
         if ((array[ptrScatola.getId()].getIdTarget() % ptrDati.getNumColonne()) != 0) {
-            if ((array[ptrScatola.getId()].isBallTF()) && (ptrDati.isSposta()) && (array[ptrScatola.getId()].getBall().getPosX() == (150 + (150 * ptrScatola.getId())) - (array[ptrScatola.getId()].getBall().getRaggio() / 2)) && (ptrScatola.isPiena())) {     //se pallina è presente, se ha raggiunto una velocità sufficente e se tocca il bordo
+            if ((array[ptrScatola.getId()].isBallTF()) && (ptrDati.isSposta()) && (array[ptrScatola.getId()].getBall().getPosX() == (150 + (150 * ptrScatola.getId())) - (array[ptrScatola.getId()].getBall().getRaggio() / 2)) && ((ptrScatola.getSandQuantity()>3000) || (ptrScatola.isPiena()))) {     //se pallina è presente, se ha raggiunto una velocità sufficente e se tocca il bordo
                 array[array[ptrScatola.getId()].getIdTarget()].setBall(new Pallina(array[ptrScatola.getId()].getPtrDati(), (array[ptrScatola.getId()].getIdTarget() * 150) + (array[ptrScatola.getId()].getBall().getRaggio() / 2), 75));      //Creo nuova pallina in scatola successiva
 
                 CambioPallina();        //Resetto ball e ballTF della scatola in esecuzione, resetto l'attributo sposta e indico che la scatola successiva ha la pallina
@@ -148,9 +148,9 @@ public class ThPallina extends Thread {
         if (array[ptrScatola.getId()].isBallTF()) {
             array[ptrScatola.getId()].getBall().DecrementaVelocitàX();      //decremento velocità pallina se presente nella scatola
         }
-
+ 
         if ((ptrScatola.getId() % ptrDati.getNumColonne()) != 0) {
-            if ((array[ptrScatola.getId()].isBallTF()) && (ptrDati.isSposta()) && (array[ptrScatola.getId()].getBall().getPosX() == (150 * ptrScatola.getId()) + (array[ptrScatola.getId()].getBall().getRaggio() / 2)) && (ptrScatola.isPiena())) {             //se pallina è presente, se ha raggiunto una velocità sufficente e se tocca il bordo
+            if ((array[ptrScatola.getId()].isBallTF()) && (ptrDati.isSposta()) && (array[ptrScatola.getId()].getBall().getPosX() == (150 * ptrScatola.getId()) + (array[ptrScatola.getId()].getBall().getRaggio() / 2)) && ((ptrScatola.getSandQuantity()>3000) || (ptrScatola.isPiena()))) {             //se pallina è presente, se ha raggiunto una velocità sufficente e se tocca il bordo
                 if (array[ptrScatola.getId()].getIdTarget() == 0) {
                     array[array[ptrScatola.getId()].getIdTarget()].setBall(new Pallina(array[ptrScatola.getId()].getPtrDati(), (150 + (array[ptrScatola.getId()].getIdTarget() * 150)) - (array[ptrScatola.getId()].getBall().getRaggio() / 2), 75));       //Creo nuova pallina in scatola precedente(se è la scatola con id=0)
                 } else {

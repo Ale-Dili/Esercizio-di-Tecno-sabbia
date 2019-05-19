@@ -12,7 +12,7 @@ import processing.core.*;
  *
  * @brief ThScatola.java: classe ThScatola che si occupa della gestione della
  * sabbia.
- */
+ */ 
 public class ThScatola extends Thread {
 
     /**

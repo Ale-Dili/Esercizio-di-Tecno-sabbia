@@ -96,19 +96,20 @@ public class DatiCondivisi {
      */
     public DatiCondivisi() {
         this.perSabbia = 100;
-        this.numColonne = 5;
+        this.numColonne = 8;
         this.numRighe = 2;
         array = new Scatole[numColonne * numRighe];
         eseguiPallina=new Semaphore(0);
     }
     
-    public void waitPallina() throws InterruptedException {
+    public  void waitPallina() throws InterruptedException {
         eseguiPallina.acquire();
     }
     
     public void signalPallina() {
         eseguiPallina.release();
     }
+     
     
     
     /**

@@ -125,6 +125,7 @@ public class EsSabbia_Scatola extends PApplet {
                 }
                 
                 
+                
                 if (array[id].isBallTF()) {
                     drawBall(id);
                 }

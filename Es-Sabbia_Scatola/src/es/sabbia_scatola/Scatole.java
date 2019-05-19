@@ -9,7 +9,7 @@ package es.sabbia_scatola;
  *
  * @author Alessandro
  */
-public class Scatole {
+public class Scatole { 
     /**
      * @author Edoardo Ballabio
      *
