@@ -30,6 +30,9 @@ class Pallina {
 '@brief: contatore usato per gestire la velocita' della pallina'
 - int cont
 
+'@brief: oggetto di tipo scatola usato per la gestione della pallina
+- Scatole ptrScatola
+
 '@brief: Metodo che aggiorna la posizione e la velocità della pallina'
 + void aggiornaInfo(int velX,int velY)
 
@@ -58,6 +61,9 @@ class Sabbia {
 
 '@brief: identifica la quantità di sabbia che esce dalla scatola in seguito al movimento'
 - float sabbiaSpostata
+
+'@brief: array di scatole presenti nell'esecuzione
+- Scatole array[]
 
 '@brief: oggetto della classe DatiCondivisi'
 - DatiCondivisi ptrDati
@@ -97,8 +103,8 @@ class Scatole {
 '@brief: Oggetto della classe Sabbia
 - Sabbia sand
 
-'@brief: indica l'inclinazione della scatola nell'asse delle ordinate'
-- int : inclinazione
+'@brief: indica se la scatola e' piena 
+- boolean : piena
 
 '@brief: Oggetto della classe Pallina
 - Pallina ball
@@ -124,8 +130,11 @@ class Scatole {
 '@brief: Identificatore della scatola in cui la sabbia e la pallina (presenti nella scatola al momento) devono essere spostati
 - int idTarget
 
-'@brief: Metodo usato per proporzione'
-+ void valueSand()
+'@brief: Metodo usato per richiamare il metodo move della classe Pallina
++ void moveBall()
+
+'@brief: Metodo usato per richiamare il metodo move della classe Sabbia
++ void move()
 
 '@brief: Metodo usato per proporzione'
 + void valueSandPixel()
@@ -135,6 +144,9 @@ class Scatole {
 
 
 class DatiCondivisi {
+'@brief: semaforo per interrompere il thread pallina quando non in funzione
+-Semaphore eseguiPallina
+
 '@brief: lunghezza dello schermo
 -int lungS 
 
@@ -147,17 +159,18 @@ class DatiCondivisi {
 '@brief: Insieme di scatole'
 -Scatole[] array
 
-'@brief: lunghezza della scatola
--int lungB 
-
-'@brief: altezza della scatola
--int altB
-
 '@brief: oggetto della classe sensore
 -Sensore s
 
 '@brief: percentuale di sabbia contenuta nella scatola'
 -int perSabbia
+
+'@brief: rappresenta il numero di righe della scatola
+-int numRighe 
+
+'@brief: rappresenta il numero di colonne della scatola
+-int numColonne
+
 }
 
 class ThScatola{
@@ -172,6 +185,41 @@ class ThScatola{
 
 '@brief: Metodo run del thread che raccoglie le informazioni delle altre classi e le organizza per disegnarle'
 + void run()
+
+'@brief: Metodo che svuota una scatola impostando i valori di default di una scatola vuota'
++ void cambioSabbia()
+
+'@brief: Metodo che aggiorna le informazioni della sabbia in una scatola'
++ void aggiornaSabbia()
+
+'@brief: Metodo che gesstisce la sabbia verso la scatola di sinistra'
++ void gestioneSabbiaVersoSinistra()
+
+'@brief: Metodo che gesstisce la sabbia verso la scatola di destra'
++ void gestioneSabbiaVersoDestra()
+}
+
+class ThPallina{
+'@brief: oggetto della classe DatiCondivisi'
+- DatiCondivisi ptrDati
+
+'@brief: oggetto della classe Scatole'
+- Scatole ptrScatole
+
+'@brief: Insieme di scatole'
+-Scatole[] array
+
+'@brief: Metodo run del thread che raccoglie le informazioni dalle altre classi e gestisce la pallina in modo autonomo'
++ void run()
+
+'@brief: Metodo che permette di spostare la pallina nella scatola di destra'
++ void GestionePallinaVersoDestra()
+
+'@brief: Metodo che permette di spostare la pallina nella scatola di sinistra'
++ void GestionePallinaVersoSinistra()
+
+'@brief: Metodo che notifica lo spostamento della pallina nella varie scatole'
++ void cambioPallina()
 }
 
 
@@ -181,6 +229,7 @@ Sabbia "1" --o "1" Scatole : contenuta >
 Pallina "1" --o "1" Scatole : contenuta >
 DatiCondivisi "1" -- "1" Scatole : interagisce >
 DatiCondivisi "1" -- "1" ThScatola : gestisceInformazioni <
+DatiCondivisi "1" -- "1" ThPallina : gestisceInformazioni <
 
 
 
